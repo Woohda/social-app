@@ -7,6 +7,7 @@ const requiredString = z
 
 export const singUpSchema = z.object({
 	email: requiredString.email('Введите корректный email'),
+	name: requiredString,
 	username: requiredString
 		.min(3, 'Имя пользователя должно содержать минимум 3 символа')
 		.regex(
@@ -21,11 +22,11 @@ export const singUpSchema = z.object({
 		)
 })
 
-export type SignUpSchema = z.infer<typeof singUpSchema>
+export type SingUpValues = z.infer<typeof singUpSchema>
 
 export const loginSchema = z.object({
 	email: requiredString,
 	password: requiredString
 })
 
-export type LoginSchema = z.infer<typeof loginSchema>
+export type LoginValues = z.infer<typeof loginSchema>

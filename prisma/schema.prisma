@@ -19,21 +19,23 @@ generator client {
 // Example data model
 model User {
   id            Int       @id @default(autoincrement()) 
-  email         String   @unique
-  username      String
+  email         String    @unique
+  username      String    @unique
+  Name          String?
   passwordHash  String?
-  googleId      String? @unique
-  githubId      String? @unique
+  googleId      String?   @unique
+  githubId      String?   @unique
   avatarUrl     String?
   bio           String?
   sessions      Session[]  
-  createdAt     DateTime @default(now())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   @@map("users")
 }
 
 model Session {
-  id            String   @id
+  id            String    @id
   userId        Int
   expiresAt     DateTime
 
