@@ -5,7 +5,7 @@ const requiredString = z
 	.trim()
 	.min(1, 'Поле обязательно для заполнения')
 
-export const singUpSchema = z.object({
+export const signUpSchema = z.object({
 	email: requiredString.email('Введите корректный email'),
 	name: requiredString,
 	username: requiredString
@@ -22,7 +22,7 @@ export const singUpSchema = z.object({
 		)
 })
 
-export type SingUpValues = z.infer<typeof singUpSchema>
+export type SignUpValues = z.infer<typeof signUpSchema>
 
 export const loginSchema = z.object({
 	email: requiredString,

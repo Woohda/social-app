@@ -2,17 +2,17 @@
 
 import { checkUserExists, createSession, hashOptions } from '@/auth'
 import prisma from '@/lib/prisma'
-import { SingUpValues, singUpSchema } from '@/lib/validation'
+import { SignUpValues, signUpSchema } from '@/lib/validation'
 import { hash } from '@node-rs/argon2'
 import { generateIdFromEntropySize } from 'lucia'
 import { redirect } from 'next/navigation'
 import { isRedirectError } from 'next/dist/client/components/redirect'
 
 export async function signUp(
-	credentials: SingUpValues
+	credentials: SignUpValues
 ): Promise<{ error: string }> {
 	try {
-		const { email, username, password } = singUpSchema.parse(credentials)
+		const { email, username, password } = signUpSchema.parse(credentials)
 		// генерируем id пользователя
 		const userId = generateIdFromEntropySize(10)
 
