@@ -14,6 +14,7 @@ interface DatabaseUserAttributes {
 	githubId: string | null
 }
 
+// создаем экземпляр Lucia и передаем ему адаптер
 export const lucia = new Lucia(adapter, {
 	sessionCookie: {
 		expires: false,
@@ -39,6 +40,21 @@ declare module 'lucia' {
 	}
 }
 
+// Функция для создания сессии и куки
+export const createSession = async (userId: string) => {
+	const session = await lucia.createSession(userId, {
+		activePeriod: 60 * 60 * 24 * 3 // 3 дня
+	})
+	const sessionCookie = lucia.createSessionCookie(session.id)
+	;(await cookies()).set({
+		name: sessionCookie.name,
+		value: sessionCookie.value,
+		...sessionCookie.attributes
+	})
+	return session
+}
+
+// Функция проверяет, существует ли куки с сессией и валидирует ее
 export const validateRequest = cache(
 	async (): Promise<
 		{ user: User; session: Session } | { user: null; session: null }
@@ -73,3 +89,23 @@ export const validateRequest = cache(
 		return result
 	}
 )
+
+// Функция для провеки существования пользователя
+export const checkUserExists = (username: string) => {
+	return prisma.user.findFirst({
+		where: {
+			username: {
+				equals: username,
+				mode: 'insensitive' // игнорируем регистр
+			}
+		}
+	})
+}
+
+// Настройки хеширования пароля
+export const hashOptions = {
+	memoryCost: 19456,
+	timeCost: 2,
+	parallelism: 1,
+	outputLen: 32
+}
