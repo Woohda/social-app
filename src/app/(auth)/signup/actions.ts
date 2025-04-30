@@ -1,6 +1,11 @@
 'use server'
 
-import { checkUserExists, createSession, hashOptions } from '@/auth'
+import {
+	checkUserExists,
+	createSession,
+	createSessionCookie,
+	hashOptions
+} from '@/auth'
 import prisma from '@/lib/prisma'
 import { SignUpValues, signUpSchema } from '@/lib/validation'
 import { hash } from '@node-rs/argon2'
@@ -44,7 +49,10 @@ export async function signUp(
 		})
 
 		// создаем сессию
-		await createSession(userId)
+		const session = await createSession(userId)
+
+		// создаем куки сессии
+		await createSessionCookie(session)
 
 		return redirect('/')
 	} catch (error) {

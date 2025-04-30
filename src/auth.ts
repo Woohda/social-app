@@ -40,18 +40,31 @@ declare module 'lucia' {
 	}
 }
 
-// Функция для создания сессии и куки
+// Функция для создания сессии пользователя
 export const createSession = async (userId: string) => {
-	const session = await lucia.createSession(userId, {
+	return await lucia.createSession(userId, {
 		activePeriod: 60 * 60 * 24 * 3 // 3 дня
 	})
+}
+
+// Функция для создания новой куки
+export const createNewSessionCookie = async () => {
+	const sessionCookie = lucia.createBlankSessionCookie()
+	;(await cookies()).set({
+		name: sessionCookie.name,
+		value: sessionCookie.value,
+		...sessionCookie.attributes
+	})
+}
+
+// Функция для обновления куки
+export const createSessionCookie = async (session: Session) => {
 	const sessionCookie = lucia.createSessionCookie(session.id)
 	;(await cookies()).set({
 		name: sessionCookie.name,
 		value: sessionCookie.value,
 		...sessionCookie.attributes
 	})
-	return session
 }
 
 // Функция проверяет, существует ли куки с сессией и валидирует ее
@@ -70,20 +83,12 @@ export const validateRequest = cache(
 
 		try {
 			if (result.session && result.session.fresh) {
-				const sessionCookie = lucia.createSessionCookie(result.session.id)
-				;(await cookies()).set({
-					name: sessionCookie.name,
-					value: sessionCookie.value,
-					...sessionCookie.attributes
-				})
+				// обновляем куки сессии
+				createSessionCookie(result.session)
 			}
 			if (!result.session) {
-				const sessionCookie = lucia.createBlankSessionCookie()
-				;(await cookies()).set({
-					name: sessionCookie.name,
-					value: sessionCookie.value,
-					...sessionCookie.attributes
-				})
+				// если сессия не валидна, создаем новую куку
+				createNewSessionCookie()
 			}
 		} catch {}
 		return result

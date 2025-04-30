@@ -1,6 +1,11 @@
 'use server'
 
-import { checkUserExists, createSession, hashOptions } from '@/auth'
+import {
+	checkUserExists,
+	createSession,
+	createSessionCookie,
+	hashOptions
+} from '@/auth'
 import { loginSchema, LoginValues } from '@/lib/validation'
 import { isRedirectError } from 'next/dist/client/components/redirect'
 import { redirect } from 'next/navigation'
@@ -29,7 +34,9 @@ export async function login(
 		}
 
 		// создаем сессию
-		await createSession(existingUser.id)
+		const session = await createSession(existingUser.id)
+		// создаем куки сессии
+		await createSessionCookie(session)
 
 		return redirect('/')
 	} catch (error) {
