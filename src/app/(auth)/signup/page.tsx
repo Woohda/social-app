@@ -8,15 +8,15 @@ export const metadata: Metadata = {
 
 export default function Page() {
 	return (
-		<section className='flex h-screen items-center justify-center p-5'>
-			<div className='flex h-full max-h-[40rem] w-full max-w-[40rem] flex-col items-center justify-center rounded-lg bg-card shadow-lg'>
-				<h1 className='text-3xl font-bold'>Sign Up</h1>
-				<p className='text-sm text-muted-foreground'>
+		<section className='flex h-screen items-center justify-center'>
+			<div className='flex gap-4 w-full max-w-[40rem] p-10 flex-col items-center justify-center rounded-lg bg-card shadow-lg'>
+				<h1 className='text-3xl font-bold'>Регистрация</h1>
+				<p className='text-xs text-center text-muted-foreground'>
 					Болтовня - это социальная сеть для твоей болтовни. <br />
 					Место где ты можешь болтать с друзьями и знакомиться с новыми людьми!
 				</p>
 				<SignUpForm />
-				<Link href='/login' className='text-sm text-muted-foreground'>
+				<Link href='/login' className='text-xs text-muted-foreground'>
 					Уже есть аккаунт? Войти
 				</Link>
 			</div>

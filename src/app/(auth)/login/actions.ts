@@ -35,6 +35,7 @@ export async function login(
 
 		// создаем сессию
 		const session = await createSession(existingUser.id)
+
 		// создаем куки сессии
 		await createSessionCookie(session)
 

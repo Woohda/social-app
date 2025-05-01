@@ -17,9 +17,7 @@ export async function signUp(
 	credentials: SignUpValues
 ): Promise<{ error: string }> {
 	try {
-		const { email, username, password } = signUpSchema.parse(credentials)
-		// генерируем id пользователя
-		const userId = generateIdFromEntropySize(10)
+		const { email, name, username, password } = signUpSchema.parse(credentials)
 
 		// проверяем, существует ли пользователь с таким именем
 		const existingUser = await checkUserExists(username)
@@ -36,6 +34,9 @@ export async function signUp(
 		// хешируем пароль
 		const passwordHash = await hash(password, hashOptions)
 
+		// генерируем id пользователя
+		const userId = generateIdFromEntropySize(10)
+
 		// создаем пользователя
 		await prisma.user.create({
 			data: {
@@ -43,6 +44,7 @@ export async function signUp(
 				email,
 				username,
 				passwordHash,
+				name,
 				createdAt: new Date(),
 				updatedAt: new Date()
 			}
