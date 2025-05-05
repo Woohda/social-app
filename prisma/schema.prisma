@@ -15,9 +15,9 @@ model User {
   googleId     String?   @unique
   githubId     String?   @unique
   avatarUrl    String?
-  name         String?
   bio          String?
   createdAt    DateTime  @default(now())
+  name         String?
   sessions     Session[]
 
   @@map("users")
