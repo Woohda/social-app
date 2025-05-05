@@ -14,7 +14,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { useState, useTransition } from 'react'
 import { signUp } from './actions'
-import { PasswordInput } from '@/components/passwordInput'
+import PasswordInput from '@/components/passwordInput'
 import LoadingButton from '@/components/loadingButton'
 
 export default function SignUpForm() {

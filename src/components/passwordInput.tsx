@@ -34,4 +34,4 @@ const PasswordInput = React.forwardRef<
 })
 PasswordInput.displayName = 'PasswordInput'
 
-export { PasswordInput }
+export default PasswordInput
