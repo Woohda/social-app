@@ -19,11 +19,20 @@ export async function signUp(
 	try {
 		const { email, name, username, password } = signUpSchema.parse(credentials)
 
-		// проверяем, существует ли пользователь с таким именем или email
-		const existingUser = await checkUserExists(username || email)
+		// проверяем, существует ли пользователь с таким email
+		const existingUser = await checkUserExists(email)
+
 		if (existingUser) {
 			return {
-				error: `Пользователь с таким ${username || email} уже существует`
+				error: `Пользователь с таким email уже существует`
+			}
+		}
+
+		// проверяем, существует ли пользователь с таким username
+		const existingUsername = await checkUserExists(username)
+		if (existingUsername) {
+			return {
+				error: `Пользователь с таким username уже существует`
 			}
 		}
 
@@ -31,7 +40,7 @@ export async function signUp(
 		const passwordHash = await hash(password, hashOptions)
 
 		// генерируем id пользователя
-		const userId = Number(generateIdFromEntropySize(10))
+		const userId = generateIdFromEntropySize(10)
 
 		// создаем пользователя
 		await prisma.user.create({
@@ -40,8 +49,7 @@ export async function signUp(
 				email,
 				username,
 				passwordHash,
-				name,
-				createdAt: new Date()
+				name
 			}
 		})
 
