@@ -1,44 +1,33 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-// Define database connection via the `DATABASE_URL` env var
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// Define custom output path for generated Prisma Client
-generator client {
-  provider = "prisma-client-js"
-}
-
-// Example data model
 model User {
-  id            Int       @id @default(autoincrement()) 
-  email         String    @unique
-  username      String    @unique
-  name          String?
-  passwordHash  String?
-  googleId      String?   @unique
-  githubId      String?   @unique
-  avatarUrl     String?
-  bio           String?
-  sessions      Session[]  
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  username     String
+  passwordHash String?
+  googleId     String?   @unique
+  githubId     String?   @unique
+  avatarUrl    String?
+  name         String?
+  bio          String?
+  createdAt    DateTime  @default(now())
+  sessions     Session[]
 
   @@map("users")
 }
 
 model Session {
-  id            String    @id
-  userId        Int
-  expiresAt     DateTime
-
-  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+  id        String   @id
+  userId    Int
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }

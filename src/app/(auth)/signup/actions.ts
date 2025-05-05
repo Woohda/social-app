@@ -45,8 +45,7 @@ export async function signUp(
 				username,
 				passwordHash,
 				name,
-				createdAt: new Date(),
-				updatedAt: new Date()
+				createdAt: new Date()
 			}
 		})
 
