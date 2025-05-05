@@ -19,16 +19,12 @@ export async function signUp(
 	try {
 		const { email, name, username, password } = signUpSchema.parse(credentials)
 
-		// проверяем, существует ли пользователь с таким именем
-		const existingUser = await checkUserExists(username)
+		// проверяем, существует ли пользователь с таким именем или email
+		const existingUser = await checkUserExists(username || email)
 		if (existingUser) {
-			return { error: 'Пользователь с таким username уже существует' }
-		}
-
-		// проверяем, существует ли пользователь с таким email
-		const existingEmail = await checkUserExists(email)
-		if (existingEmail) {
-			return { error: 'Пользователь с таким email уже существует' }
+			return {
+				error: `Пользователь с таким ${username || email} уже существует`
+			}
 		}
 
 		// хешируем пароль

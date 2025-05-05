@@ -15,10 +15,10 @@ export async function login(
 	credentials: LoginValues
 ): Promise<{ error: string }> {
 	try {
-		const { email, password } = loginSchema.parse(credentials)
+		const { email, username, password } = loginSchema.parse(credentials)
 
 		// проверяем, существует ли пользователь с таким email
-		const existingUser = await checkUserExists(email)
+		const existingUser = await checkUserExists(email || username)
 		if (!existingUser || !existingUser.passwordHash) {
 			return { error: 'Неверный логин или пароль' }
 		}

@@ -26,6 +26,7 @@ export type SignUpValues = z.infer<typeof signUpSchema>
 
 export const loginSchema = z.object({
 	email: requiredString,
+	username: requiredString,
 	password: requiredString
 })
 

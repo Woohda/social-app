@@ -49,12 +49,12 @@ export default function LoginForm() {
 					name='email'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Почта:</FormLabel>
+							<FormLabel>Почта/Логин:</FormLabel>
 							<FormControl>
 								<Input
 									{...field}
-									placeholder='Введите адрес почты'
-									type='email'
+									placeholder='Введите адрес почты или логин'
+									type='text'
 								/>
 							</FormControl>
 							<FormMessage />

@@ -96,13 +96,23 @@ export const validateRequest = cache(
 )
 
 // Функция для провеки существования пользователя
-export const checkUserExists = (username: string) => {
+export const checkUserExists = (identifier: string) => {
 	return prisma.user.findFirst({
 		where: {
-			username: {
-				equals: username,
-				mode: 'insensitive' // игнорируем регистр
-			}
+			OR: [
+				{
+					email: {
+						equals: identifier,
+						mode: 'insensitive' // игнорируем регистр
+					}
+				},
+				{
+					username: {
+						equals: identifier,
+						mode: 'insensitive' // игнорируем регистр
+					}
+				}
+			]
 		}
 	})
 }
