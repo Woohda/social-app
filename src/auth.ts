@@ -7,7 +7,7 @@ import { cookies } from 'next/headers'
 const adapter = new PrismaAdapter(prisma.session, prisma.user)
 
 interface DatabaseUserAttributes {
-	id: string
+	id: number
 	username: string
 	avatarUrl: string | null
 	googleId: string | null
@@ -41,8 +41,8 @@ declare module 'lucia' {
 }
 
 // Функция для создания сессии пользователя
-export const createSession = async (userId: string) => {
-	return await lucia.createSession(userId, {
+export const createSession = async (userId: number) => {
+	return await lucia.createSession(String(userId), {
 		activePeriod: 60 * 60 * 24 * 3 // 3 дня
 	})
 }

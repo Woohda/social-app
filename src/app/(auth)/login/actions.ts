@@ -42,7 +42,7 @@ export async function login(
 		return redirect('/')
 	} catch (error) {
 		if (isRedirectError(error)) throw error
-		console.error('Ошибка регистрации:', error)
-		return { error: 'Ошибка регистрации, попробуйте снова.' }
+		console.error('Ошибка входа:', error)
+		return { error: 'Ошибка входа, попробуйте снова.' }
 	}
 }

@@ -35,7 +35,7 @@ export async function signUp(
 		const passwordHash = await hash(password, hashOptions)
 
 		// генерируем id пользователя
-		const userId = generateIdFromEntropySize(10)
+		const userId = Number(generateIdFromEntropySize(10))
 
 		// создаем пользователя
 		await prisma.user.create({
