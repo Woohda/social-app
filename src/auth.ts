@@ -40,25 +40,27 @@ declare module 'lucia' {
 	}
 }
 
-// Функция для создания сессии пользователя
+// Функция проверки и создания сессии пользователя
 export const createSession = async (userId: string) => {
 	const existingSession = await prisma.session.findFirst({
 		where: {
 			userId: userId
 		}
 	})
-
 	if (existingSession) {
 		// Если сессия уже существует не создаем новую
 		return {
 			...existingSession,
 			userId: existingSession.userId,
-			id: existingSession.id
+			id: existingSession.id,
+			fresh: false
 		}
 	}
-	return await lucia.createSession(String(userId), {
+	// Если сессия не существует создаем новую
+	const newSession = await lucia.createSession(userId, {
 		activePeriod: 60 * 60 * 24 * 3 // 3 дня
 	})
+	return { ...newSession, fresh: true }
 }
 
 // Функция для создания новой куки
