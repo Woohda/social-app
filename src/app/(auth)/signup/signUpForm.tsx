@@ -14,8 +14,8 @@ import {
 import { Input } from '@/components/ui/input'
 import { useState, useTransition } from 'react'
 import { signUp } from './actions'
-import PasswordInput from '@/components/passwordInput'
-import LoadingButton from '@/components/loadingButton'
+import PasswordInput from '@/components/PasswordInput'
+import LoadingButton from '@/components/LoadingButton'
 
 export default function SignUpForm() {
 	const [isPending, startTransition] = useTransition()
