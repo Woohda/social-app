@@ -7,6 +7,7 @@ import { submitPost } from './actions'
 import useSession from '@/hooks/use-session'
 import UserAvatar from '@/components/UserAvatar'
 import { Button } from '@/components/ui/button'
+import './style.css'
 
 const PostEditor = () => {
 	const { user } = useSession()
@@ -51,7 +52,7 @@ const PostEditor = () => {
 					disabled={!post.trim()}
 					className='min-w-20 mt-5'
 				>
-					Добавить пост
+					Опубликовать
 				</Button>
 			</div>
 		</div>
