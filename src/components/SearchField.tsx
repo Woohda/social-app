@@ -19,7 +19,7 @@ const SearchField = () => {
 			aria-label='Поиск'
 			action='/search'
 			method='get'
-			className='flex w-full max-w-sm items-center space-x-2'
+			className='flex w-full max-w-52 items-center space-x-2'
 		>
 			<div className='relative'>
 				<Input name='search' placeholder='Поиск' className='pe-10' />
