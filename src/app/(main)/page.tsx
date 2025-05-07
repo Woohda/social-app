@@ -2,7 +2,7 @@ import PostEditor from '@/components/posts/editor/PostEditor'
 
 export default function Home() {
 	return (
-		<main className='h-[300vh] w-full  bg-red-50'>
+		<main className='h-[300vh] w-full'>
 			<div className='w-full'>
 				<PostEditor />
 			</div>
