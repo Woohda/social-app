@@ -10,7 +10,7 @@ const ThemeButton = () => {
 	return (
 		<div className='flex items-center relative'>
 			{theme === 'light' && (
-				<SunIcon className='mr-2 size-4 absolute left-[3.5px] z-10' />
+				<SunIcon className='mr-2 size-4 absolute left-[3.5px] z-10 stroke-orange-400' />
 			)}
 			<Switch
 				checked={theme === 'dark'}
