@@ -1,5 +1,11 @@
+import PostEditor from '@/components/posts/editor/PostEditor'
+
 export default function Home() {
 	return (
-		<main className='flex flex-col gap-8 row-start-2 items-center sm:items-start'></main>
+		<main className='h-[300vh] w-full  bg-red-50'>
+			<div className='w-full'>
+				<PostEditor />
+			</div>
+		</main>
 	)
 }
