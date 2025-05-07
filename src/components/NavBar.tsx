@@ -1,3 +1,4 @@
+import SearchField from './SearchField'
 import UserButton from './UserButton'
 import Link from 'next/link'
 
@@ -8,7 +9,8 @@ const NavBar = () => {
 				<Link href='/' className='text-2xl font-bold text-primary'>
 					Home
 				</Link>
-				<UserButton />
+				<SearchField />
+				<UserButton className='sm:ms-auto' />
 			</nav>
 		</header>
 	)
