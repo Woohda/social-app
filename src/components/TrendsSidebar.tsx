@@ -6,12 +6,15 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import UserAvatar from './UserAvatar'
 import { Button } from './ui/button'
+import { unstable_cache } from 'next/cache'
+import { formatNumber } from '@/lib/utils'
 
 const TrendsSidebar = () => {
 	return (
 		<div className='sticky top-[5.25rem] hidden h-fit w-72 flex-none space-y-5 md:block lg:w-80'>
 			<Suspense fallback={<Loader2 className='mx-auto animate-spin' />}>
 				<WhoToFollow />
+				<TrendsTopics />
 			</Suspense>
 		</div>
 	)
@@ -33,7 +36,7 @@ const WhoToFollow = async () => {
 
 	return (
 		<div className='flex flex-col gap-5 rounded-2xl bg-card p-5 shadow-sm'>
-			<h2 className='text-lg font-bold'>Возможно, вам понравится</h2>
+			<h2 className='text-lg font-bold'>Возможно, вы знакомы</h2>
 			{usersFollowed.map(user => (
 				<div key={user.id} className='flex items-center justify-between gap-3'>
 					<Link
@@ -42,15 +45,68 @@ const WhoToFollow = async () => {
 					>
 						<UserAvatar avatarUrl={user.avatarUrl} className='flex-none' />
 						<div className='flex flex-col'>
-							<p className='text-sm font-semibold text-foreground'>
+							<p className='text-sm line-clamp-1 break-all font-semibold text-foreground hover:underline'>
 								{user.name}
 							</p>
-							<p className='text-sm text-muted-foreground'>@{user.username}</p>
+							<p className='text-sm line-clamp-1 break-all text-muted-foreground'>
+								@{user.username}
+							</p>
 						</div>
 					</Link>
 					<Button>Подписаться</Button>
 				</div>
 			))}
+		</div>
+	)
+}
+
+const getTrendingTopics = unstable_cache(
+	async () => {
+		const trendsTopics = await prisma.$queryRaw<
+			{ hashtag: string; count: bigint }[]
+		>`
+        SELECT LOWER(unnest(regexp_matches(content, '#[[:alnum:]_]+', 'g'))) AS hashtag,
+        COUNT(*) AS count
+        FROM posts
+        GROUP BY hashtag
+        ORDER BY count DESC, hashtag ASC
+        LIMIT 5
+        `
+		return trendsTopics.map(topic => ({
+			hashtag: topic.hashtag,
+			count: Number(topic.count)
+		}))
+	},
+	['trending_topics'],
+	{
+		revalidate: 1 // 3 hours
+	}
+)
+
+const TrendsTopics = async () => {
+	const trendsTopics = await getTrendingTopics()
+	return (
+		<div className='flex flex-col gap-3 rounded-2xl bg-card p-5 shadow-sm'>
+			<h2 className='text-lg font-bold'>Трендовые обсуждения</h2>
+			{trendsTopics.map(({ hashtag, count }) => {
+				const title = hashtag.split('#')[1]
+				return (
+					<Link key={title} href={`/hashtags/${title}`} className='block'>
+						<p
+							className='line-clamp-1 break-all font-semibold text-foreground hover:underline'
+							title={hashtag}
+						>
+							{hashtag}
+						</p>
+						<p className='text-sm text-muted-foreground '>
+							{formatNumber(count)}{' '}
+							{(count === 1 && 'тема') ||
+								(count >= 2 && count <= 4 && 'темы') ||
+								(count >= 5 && 'тем')}
+						</p>
+					</Link>
+				)
+			})}
 		</div>
 	)
 }
