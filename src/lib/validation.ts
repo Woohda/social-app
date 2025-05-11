@@ -1,12 +1,21 @@
 import { z } from 'zod'
 
-// Задаем схему валидации для формы регистрации
+/**
+ * В этом файле мы используем библиотеку zod для валидации данных.
+ * Zod позволяет нам создавать схемы валидации и проверять данные на соответствие этим схемам.
+ * @property {requiredString} requiredString - валидация для обязательной строки.
+ * @property {signUpSchema} signUpSchema - Схема валидации для формы регистрации.
+ * @type {SignUpValues} - Тип для значений формы регистрации.
+ * @property {loginSchema} loginSchema - Схема валидации для формы входа.
+ * @type {LoginValues} - Тип для значений формы входа.
+ * @property {createPostSchema} createPostSchema - Схема валидации для создания поста.
+ */
+
 const requiredString = z
 	.string()
 	.trim()
 	.min(1, 'Поле обязательно для заполнения')
 
-// Задаем схему валидации для формы регистрации
 export const signUpSchema = z.object({
 	email: requiredString.email('Введите корректный email'),
 	name: requiredString,
@@ -26,7 +35,6 @@ export const signUpSchema = z.object({
 
 export type SignUpValues = z.infer<typeof signUpSchema>
 
-// Задаем схему валидации для формы входа
 export const loginSchema = z.object({
 	user: requiredString,
 	password: requiredString
@@ -34,7 +42,6 @@ export const loginSchema = z.object({
 
 export type LoginValues = z.infer<typeof loginSchema>
 
-// Задаем схему валидации для поста
 export const createPostSchema = z.object({
 	content: requiredString
 })
