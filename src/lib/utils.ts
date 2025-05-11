@@ -2,6 +2,19 @@ import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { format, formatDistanceToNowStrict } from 'date-fns'
 
+/**
+ * Это файл с утилитами, которые используются в приложении.
+ * Здесь находятся функции, которые помогают в работе с данными и стилями.
+ * @property {cn} cn - Функция для объединения классов CSS с использованием clsx и tailwind-merge.
+ * @returns {string} - Объединенные классы CSS.
+ * @property {formatRelativeDate} formatRelativeDate - Функция для форматирования даты в относительном формате.
+ * @param {Date} date - Дата, которую нужно отформатировать.
+ * @returns {string} - Отформатированная дата в относительном формате.
+ * @property {formatNumber} formatNumber - Функция для форматирования числа в компактный вид с использованием Intl.NumberFormat.
+ * @param {number} num - Число, которое нужно отформатировать.
+ * @returns {string} - Отформатированное число в компактном виде.
+ */
+
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
 }
