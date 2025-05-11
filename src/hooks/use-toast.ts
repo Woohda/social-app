@@ -2,8 +2,27 @@
 
 // Inspired by react-hot-toast library
 import * as React from 'react'
-
 import type { ToastActionElement, ToastProps } from '@/components/ui/toast'
+
+/**
+ * Пользовательский хук для управления уведомлениями (тостами).
+ * Позволяет добавлять, обновлять и удалять уведомления.
+ * @returns {object} Объект с состоянием уведомлений и функциями для управления ими.
+ * @property {type} ToasterToast - Тип уведомления, который содержит свойства для отображения уведомления.
+ * @property {type} ActionType - Типы действий, которые могут быть выполнены с уведомлениями.
+ * @property {type} Action - Тип действия, которое может быть выполнено с уведомлениями.
+ * @property {type} State - Тип состояния уведомлений, который содержит массив уведомлений.
+ * @property {function} dispatch - Функция для отправки действий для управления уведомлениями.
+ * @property {function} reducer - Функция-редюсер для управления состоянием уведомлений.
+ * @property {function} toast - Функция для добавления нового уведомления.
+ * @property {function} update - Функция для обновления существующего уведомления.
+ * @property {function} dismiss - Функция для закрытия уведомления.
+ * @property {object} toastTimeouts - Карта для хранения таймаутов уведомлений.
+ * @property {function} addToRemoveQueue - Функция для добавления уведомления в очередь на удаление.
+ * @property {function} genId - Функция для генерации уникального идентификатора для уведомления.
+ * @property {function} useToast - Хук, который возвращает состояние уведомлений и функции для их управления.
+ *
+ */
 
 const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000
