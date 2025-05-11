@@ -1,13 +1,13 @@
 import { validateRequest } from '@/auth'
+import { Button } from '@/components/ui/button'
+import UserAvatar from '@/components/UserAvatar'
 import prisma from '@/lib/prisma'
 import { userDataSelect } from '@/lib/types'
+import { formatNumber } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
-import UserAvatar from '@/components/UserAvatar'
-import { Button } from '@/components/ui/button'
 import { unstable_cache } from 'next/cache'
-import { formatNumber } from '@/lib/utils'
 
 const TrendsSidebar = () => {
 	return (

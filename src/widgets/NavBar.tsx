@@ -1,16 +1,17 @@
 'use client'
+
 import SearchField from '@/components/SearchField'
-import UserButton from '@/widgets/UserButton'
-import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
+import UserButton from '@/widgets/UserButton'
 
 const NavBar = () => {
 	const ThemeButtonNoSSR = dynamic(() => import('@/components/ThemeButton'), {
 		ssr: false
 	})
 	return (
-		<header className='sticky top-0 z-10 bg-card shadow-sm'>
-			<nav className='mx-auto max-w-7xl flex items-center justify-around flex-wrap gap-5 py-3 px-5'>
+		<header className='sticky top-0 z-50 w-full border-b bg-card shadow-sm'>
+			<nav className='mx-auto max-w-7xl flex items-center flex-wrap gap-5 py-3 px-5'>
 				<Link href='/' className='text-2xl font-bold text-primary'>
 					Home
 				</Link>

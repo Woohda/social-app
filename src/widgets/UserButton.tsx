@@ -14,6 +14,7 @@ import Link from 'next/link'
 import { LogOutIcon, UserIcon } from 'lucide-react'
 import { logout } from '@/app/(auth)/actions'
 import { cn } from '@/lib/utils'
+import { useQueryClient } from '@tanstack/react-query'
 
 interface UserButtonProps {
 	className?: string
@@ -21,6 +22,8 @@ interface UserButtonProps {
 
 const UserButton = ({ className }: UserButtonProps) => {
 	const { user } = useSession()
+	const queryClient = useQueryClient()
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -40,7 +43,12 @@ const UserButton = ({ className }: UserButtonProps) => {
 					</DropdownMenuItem>
 				</Link>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem onClick={() => logout()}>
+				<DropdownMenuItem
+					onClick={() => {
+						logout()
+						queryClient.clear()
+					}}
+				>
 					<LogOutIcon className='mr-2 size-4' />
 					Выйти
 				</DropdownMenuItem>
