@@ -1,11 +1,11 @@
 'use client'
-import SearchField from './SearchField'
-import UserButton from './UserButton'
+import SearchField from '@/components/SearchField'
+import UserButton from '@/widgets/UserButton'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
 const NavBar = () => {
-	const ThemeButtonNoSSR = dynamic(() => import('./ThemeButton'), {
+	const ThemeButtonNoSSR = dynamic(() => import('@/components/ThemeButton'), {
 		ssr: false
 	})
 	return (

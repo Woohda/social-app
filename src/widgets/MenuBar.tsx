@@ -1,5 +1,5 @@
 import { BellIcon, BookmarkIcon, HomeIcon, MailIcon } from 'lucide-react'
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
 interface MenuBarProps {
