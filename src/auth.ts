@@ -4,6 +4,23 @@ import { Lucia, User, Session } from 'lucia'
 import { cache } from 'react'
 import { cookies } from 'next/headers'
 
+/**
+ * Этот файл содержит функции и настройки для работы с аутентификацией пользователей
+ * с использованием библиотеки Lucia и Prisma.
+ * Он включает в себя создание адаптера для работы с базой данных,
+ * создание экземпляра Lucia, функции для проверки и создания сессий пользователей,
+ * а также функции для работы с куками сессий.
+ * @property {PrismaAdapter} adapter - Адаптер для работы с базой данных Prisma.
+ * @property {DatabaseUserAttributes} DatabaseUserAttributes - Интерфейс для атрибутов пользователя в базе данных.
+ * @property {lucia} lucia - Экземпляр Lucia для работы с аутентификацией.
+ * @property {createSession} createSession - Функция для проверки и создания сессии пользователя.
+ * @property {createNewSessionCookie} createNewSessionCookie - Функция для создания новой куки сессии.
+ * @property {createSessionCookie} createSessionCookie - Функция для обновления куки сессии.
+ * @property {validateRequest} validateRequest - Функция для проверки существования куки с сессией и ее валидности.
+ * @property {checkUserExists} checkUserExists - Функция для проверки существования пользователя в базе данных.
+ * @property {hashOptions} hashOptions - Настройки хеширования пароля.
+ */
+
 const adapter = new PrismaAdapter(prisma.session, prisma.user)
 
 interface DatabaseUserAttributes {
@@ -40,7 +57,6 @@ declare module 'lucia' {
 	}
 }
 
-// Функция проверки и создания сессии пользователя
 export const createSession = async (userId: string) => {
 	const existingSession = await prisma.session.findFirst({
 		where: {
@@ -63,7 +79,6 @@ export const createSession = async (userId: string) => {
 	return { ...newSession, fresh: true }
 }
 
-// Функция для создания новой куки
 export const createNewSessionCookie = async () => {
 	const sessionCookie = lucia.createBlankSessionCookie()
 	;(await cookies()).set({
@@ -73,7 +88,6 @@ export const createNewSessionCookie = async () => {
 	})
 }
 
-// Функция для обновления куки
 export const createSessionCookie = async (session: Session) => {
 	const sessionCookie = lucia.createSessionCookie(session.id)
 	;(await cookies()).set({
@@ -83,7 +97,6 @@ export const createSessionCookie = async (session: Session) => {
 	})
 }
 
-// Функция проверяет, существует ли куки с сессией и валидирует ее
 export const validateRequest = cache(
 	async (): Promise<
 		{ user: User; session: Session } | { user: null; session: null }
@@ -111,7 +124,6 @@ export const validateRequest = cache(
 	}
 )
 
-// Функция для провеки существования пользователя
 export const checkUserExists = (identifier: string) => {
 	return prisma.user.findFirst({
 		where: {
@@ -133,7 +145,6 @@ export const checkUserExists = (identifier: string) => {
 	})
 }
 
-// Настройки хеширования пароля
 export const hashOptions = {
 	memoryCost: 19456,
 	timeCost: 2,
