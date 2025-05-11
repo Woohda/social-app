@@ -1,5 +1,16 @@
 import { Prisma } from '@prisma/client'
 
+/**
+ * Типы для данных пользователя и поста
+ * Используются для типизации данных, получаемых из базы данных.
+ * Эти типы помогают избежать ошибок при работе с данными и обеспечивают
+ * лучшую поддержку автозаполнения в редакторах кода.
+ * Они также помогают поддерживать согласованность типов в приложении.
+ * @property {userDataSelect} userDataSelect - Выбор данных пользователя удовлетворяющий типу Prisma.UserSelect
+ * @property {postDataInclude} postDataInclude - Включение данных поста удовлетворяющий типу Prisma.PostInclude
+ * @property {PostData} PostData - Данные поста с включением данных пользователя удовлетворяющий типу Prisma.PostGetPayload
+ */
+
 export const userDataSelect = {
 	id: true,
 	username: true,
