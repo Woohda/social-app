@@ -1,10 +1,12 @@
 import { z } from 'zod'
 
+// Задаем схему валидации для формы регистрации
 const requiredString = z
 	.string()
 	.trim()
 	.min(1, 'Поле обязательно для заполнения')
 
+// Задаем схему валидации для формы регистрации
 export const signUpSchema = z.object({
 	email: requiredString.email('Введите корректный email'),
 	name: requiredString,
@@ -24,6 +26,7 @@ export const signUpSchema = z.object({
 
 export type SignUpValues = z.infer<typeof signUpSchema>
 
+// Задаем схему валидации для формы входа
 export const loginSchema = z.object({
 	user: requiredString,
 	password: requiredString
@@ -31,6 +34,7 @@ export const loginSchema = z.object({
 
 export type LoginValues = z.infer<typeof loginSchema>
 
+// Задаем схему валидации для поста
 export const createPostSchema = z.object({
 	content: requiredString
 })
