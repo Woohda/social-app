@@ -15,7 +15,7 @@ const MenuBar = ({ className }: MenuBarProps) => {
 				title='Home'
 				asChild
 			>
-				<Link href='/' className='text-2xl font-bold text-primary'>
+				<Link href='/' className='text-lg font-bold text-primary'>
 					<HomeIcon />
 					<span className='hidden lg:inline'>Главная</span>
 				</Link>
@@ -26,7 +26,7 @@ const MenuBar = ({ className }: MenuBarProps) => {
 				title='Notifications'
 				asChild
 			>
-				<Link href='/notifications' className='text-2xl font-bold text-primary'>
+				<Link href='/notifications' className='text-lg font-bold text-primary'>
 					<BellIcon />
 					<span className='hidden lg:inline'>Уведомления</span>
 				</Link>
@@ -37,7 +37,7 @@ const MenuBar = ({ className }: MenuBarProps) => {
 				title='Massages'
 				asChild
 			>
-				<Link href='/massages' className='text-2xl font-bold text-primary'>
+				<Link href='/massages' className='text-lg font-bold text-primary'>
 					<MailIcon />
 					<span className='hidden lg:inline'>Сообщения</span>
 				</Link>
@@ -48,7 +48,7 @@ const MenuBar = ({ className }: MenuBarProps) => {
 				title='Bookmarks'
 				asChild
 			>
-				<Link href='/bookmarks' className='text-2xl font-bold text-primary'>
+				<Link href='/bookmarks' className='text-lg font-bold text-primary'>
 					<BookmarkIcon />
 					<span className='hidden lg:inline'>Закладки</span>
 				</Link>
