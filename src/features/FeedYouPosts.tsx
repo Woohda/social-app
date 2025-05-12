@@ -3,9 +3,10 @@
 import { PostsPage } from '@/lib/types'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
-import Post from '@/components/Post'
+import Post from '@/components/Post/Post'
 import kyInstance from '@/lib/ky'
 import InfiniteScrollContainer from '@/components/InfiniteScrollContainer'
+import PostLoadingSkeleton from '@/components/Post/PostLoadingSkeleton'
 
 const FeedYouPosts = () => {
 	const {
@@ -15,6 +16,7 @@ const FeedYouPosts = () => {
 		isFetching,
 		isFetchingNextPage,
 		isLoading,
+		isSuccess,
 		isError
 	} = useInfiniteQuery({
 		queryKey: ['post-feed', 'for-you'],
@@ -31,7 +33,10 @@ const FeedYouPosts = () => {
 
 	const posts = data?.pages.flatMap(page => page.posts) || []
 
-	if (isLoading) return <Loader2 className='mx-auto animate-spin' />
+	if (isLoading) return <PostLoadingSkeleton />
+
+	if (isSuccess && !posts.length && !hasNextPage)
+		return <p className='text-center text-muted-foreground'>Нет постов</p>
 
 	if (isError)
 		return (
