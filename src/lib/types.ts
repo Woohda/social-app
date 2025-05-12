@@ -8,7 +8,8 @@ import { Prisma } from '@prisma/client'
  * Они также помогают поддерживать согласованность типов в приложении.
  * @property {userDataSelect} userDataSelect - Выбор данных пользователя удовлетворяющий типу Prisma.UserSelect
  * @property {postDataInclude} postDataInclude - Включение данных поста удовлетворяющий типу Prisma.PostInclude
- * @property {PostData} PostData - Данные поста с включением данных пользователя удовлетворяющий типу Prisma.PostGetPayload
+ * @type {PostData} PostData - Данные поста с включением данных пользователя удовлетворяющий типу Prisma.PostGetPayload
+ * @property {PostPage} PostPage - Страница постов с массивом постов и курсором для пагинации
  */
 
 export const userDataSelect = {
@@ -31,3 +32,8 @@ export const postDataInclude = {
 export type PostData = Prisma.PostGetPayload<{
 	include: typeof postDataInclude
 }>
+
+export interface PostsPage {
+	posts: PostData[]
+	nextCursor: string | null
+}
