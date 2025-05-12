@@ -1,4 +1,4 @@
-import PostEditor from '@/components/posts/editor/PostEditor'
+import PostEditor from '@/widgets/PostEditor/PostEditor'
 import FeedYouPosts from '@/features/FeedYouPosts'
 import TrendsSidebar from '@/widgets/TrendsSidebar'
 
