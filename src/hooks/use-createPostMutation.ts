@@ -4,7 +4,7 @@ import {
 	useQueryClient
 } from '@tanstack/react-query'
 import { useToast } from './use-toast'
-import { submitPost } from '@/features/PostEditor/actions'
+import { createPost } from '@/features/PostEditor/actions'
 import { PostsPage } from '@/lib/types'
 
 /**
@@ -16,13 +16,13 @@ import { PostsPage } from '@/lib/types'
  * @property {useToast} - пользовательский хук useToast, который используется для отображения уведомления
  */
 
-export function useSubmitPostMutation() {
+export function useCreatePostMutation() {
 	const { toast } = useToast()
 
 	const queryClient = useQueryClient()
 
 	const mutation = useMutation({
-		mutationFn: submitPost,
+		mutationFn: createPost,
 		onSuccess: async newPost => {
 			const queryFilter = { queryKey: ['post-feed', 'for-you'] }
 			await queryClient.cancelQueries(queryFilter)

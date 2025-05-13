@@ -6,13 +6,13 @@ import Placeholder from '@tiptap/extension-placeholder'
 import useSession from '@/hooks/use-session'
 import UserAvatar from '@/components/UserAvatar'
 import './style.css'
-import { useSubmitPostMutation } from '@/hooks/use-submitPostMutation'
+import { useCreatePostMutation } from '@/hooks/use-createPostMutation'
 import LoadingButton from '@/components/LoadingButton'
 
 const PostEditor = () => {
 	const { user } = useSession()
 
-	const mutation = useSubmitPostMutation()
+	const mutation = useCreatePostMutation()
 
 	const editor = useEditor({
 		extensions: [
