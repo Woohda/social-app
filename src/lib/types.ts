@@ -22,6 +22,7 @@ export const userDataSelect = {
 export const postDataInclude = {
 	user: {
 		select: {
+			id: true,
 			username: true,
 			name: true,
 			avatarUrl: true
