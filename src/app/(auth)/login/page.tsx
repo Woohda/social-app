@@ -12,9 +12,12 @@ export default function Page() {
 			<div className='flex gap-4 w-full max-w-[25rem] p-10 flex-col items-center justify-center border-e border-solid rounded-3xl bg-card shadow-2xl'>
 				<h1 className='text-3xl font-bold'>Войти в аккаунт</h1>
 				<LoginForm />
-				<Link href='/signup' className='text-xs text-muted-foreground'>
-					У тебя нет аккаунта? Зарегистрироваться
-				</Link>
+				<span className='text-xs text-muted-foreground'>
+					У тебя нет аккаунта?{' '}
+					<Link href='/signup' className='hover:text-primary hover:underline'>
+						Зарегистрироваться
+					</Link>
+				</span>
 			</div>
 		</main>
 	)

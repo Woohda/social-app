@@ -16,9 +16,12 @@ export default function Page() {
 					Место где ты можешь болтать с друзьями и знакомиться с новыми людьми!
 				</p>
 				<SignUpForm />
-				<Link href='/login' className='text-xs text-muted-foreground'>
-					Уже есть аккаунт? Войти
-				</Link>
+				<span className='text-xs text-muted-foreground'>
+					Уже есть аккаунт?{' '}
+					<Link href='/login' className='hover:text-primary hover:underline'>
+						Войти
+					</Link>
+				</span>
 			</div>
 		</main>
 	)
