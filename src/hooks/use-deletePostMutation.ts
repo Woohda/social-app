@@ -10,8 +10,8 @@ import { PostsPage } from '@/lib/types'
 import { useRouter, usePathname } from 'next/navigation'
 
 /**
- * Кастомный хук useDeletePostMutation используется для удаления поста на сервере и обновления кэша react-query
- * при успешном удалении поста
+ * Кастомный хук useDeletePostMutation используется для удаления поста на сервере
+ * и обновления кэша react-query при успешном удалении поста
  * @property {useMutation} - хук useMutation, который используется для отправки запроса на сервер
  * и обновления кэша react-query
  * @property {useQueryClient} - хук useQueryClient, который используется для обновления кэша react-query

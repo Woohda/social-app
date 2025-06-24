@@ -10,8 +10,8 @@ import { PostsPage } from '@/lib/types'
 import useSession from './use-session'
 
 /**
- * Кастомный хук useSubmitPostMutation используется для отправки поста на сервер и обновления кэша react-query
- * при успешном создании поста
+ * Кастомный хук useSubmitPostMutation используется для отправки поста на сервер
+ * и обновления кэша react-query при успешном создании поста
  * @property {useMutation} - хук useMutation, который используется для отправки запроса на сервер
  * и обновления кэша react-query
  * @property {useSession} - пользовательский хук useSession, который используется для получения информации о текущем пользователе

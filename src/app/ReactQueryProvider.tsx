@@ -5,9 +5,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import React, { useState } from 'react'
 
 /** ReactQueryProvider это провайдер для react-query
- * Он оборачивает все приложение и передает в него queryClient
- * ReactQueryDevtools это инструменты для разработки и отладки react-query
- * Они позволяют отлаживать запросы и кеширование
+ * используется для управления состоянием запросов и кэширования данных в приложении на React.
+ * Он предоставляет контекст для всех дочерних компонентов, позволяя им использовать возможности react-query.
+ *
  * @param {React.ReactNode} children - дочерние элементы, которые будут обернуты в провайдер
  * @param {QueryClient} queryClient - клиент для react-query
  */
