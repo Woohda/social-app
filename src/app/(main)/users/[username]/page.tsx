@@ -2,6 +2,7 @@ import { validateRequest } from '@/auth'
 import UserProfile from '@/components/UserProfile'
 import prisma from '@/lib/prisma'
 import { getUserDataSelect } from '@/lib/types'
+import UserPostsFeed from '@/widgets/Posts/UserPostsFeed'
 import TrendsSidebar from '@/widgets/TrendsSidebar'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -65,6 +66,7 @@ export default async function Page({ params: promise }: PageProps) {
 		<main className='w-full min-w-0 flex gap-5'>
 			<div className='w-full flex flex-col gap-5'>
 				<UserProfile user={user} loggedInUserId={loggedInUser.id} />
+				<UserPostsFeed userId={user.id} />
 			</div>
 			<TrendsSidebar />
 		</main>
