@@ -40,8 +40,8 @@ export function useFollowerInfo(userId: string, initialState: FollowerInfo) {
 	const { mutate } = useMutation({
 		mutationFn: () =>
 			queryData.data.isFollowedByUser
-				? kyInstance.delete(`api/users/${userId}/followers`)
-				: kyInstance.post(`api/users/${userId}/followers`),
+				? kyInstance.delete(`/api/users/${userId}/followers`)
+				: kyInstance.post(`/api/users/${userId}/followers`),
 		onMutate: async () => {
 			await query.cancelQueries({ queryKey })
 			const prevState = query.getQueryData<FollowerInfo>(queryKey)
