@@ -15,6 +15,7 @@ const PostEditor = () => {
 	const mutation = useCreatePostMutation()
 
 	const editor = useEditor({
+		immediatelyRender: false,
 		extensions: [
 			StarterKit.configure({
 				bold: false,
