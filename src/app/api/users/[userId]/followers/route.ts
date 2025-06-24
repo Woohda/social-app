@@ -1,6 +1,7 @@
 import { validateRequest } from '@/auth'
 import prisma from '@/lib/prisma'
 import { FollowerInfo } from '@/lib/types'
+import { NextRequest } from 'next/server'
 
 /**
  * Этот обработчик GET-запроса для получения информации о подписчиках пользователя.
@@ -16,7 +17,7 @@ import { FollowerInfo } from '@/lib/types'
  */
 
 export async function GET(
-	req: Request,
+	req: NextRequest,
 	{ params }: { params: Promise<{ userId: string }> }
 ) {
 	try {
@@ -68,7 +69,7 @@ export async function GET(
 }
 
 export async function POST(
-	req: Request,
+	req: NextRequest,
 	{ params }: { params: Promise<{ userId: string }> }
 ) {
 	try {
@@ -107,7 +108,7 @@ export async function POST(
 }
 
 export async function DELETE(
-	req: Request,
+	req: NextRequest,
 	{ params }: { params: Promise<{ userId: string }> }
 ) {
 	try {
