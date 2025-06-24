@@ -2,6 +2,7 @@ import { FollowerInfo, UserData } from '@/lib/types'
 import UserAvatar from './UserAvatar'
 import { formatNumber, formatRelativeDate } from '@/lib/utils'
 import FollowButton from '@/features/FollowButton'
+import FollowerCount from './FollowerCount'
 
 interface UserProfileProps {
 	user: UserData
@@ -36,9 +37,7 @@ const UserProfile = ({ user, loggedInUserId }: UserProfileProps) => {
 							{formatNumber(user._count.posts)}
 						</span>
 					</span>
-					<span className='text-sm'>
-						Подписчиков: <span className='font-semibold text-base'></span>
-					</span>
+					<FollowerCount userId={user.id} initialState={followerInfo} />
 				</div>
 				{user.id === loggedInUserId ? (
 					<span className='text-sm text-muted-foreground'>Это вы</span>
