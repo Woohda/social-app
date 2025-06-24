@@ -64,6 +64,13 @@ export function useFollowerInfo(userId: string, initialState: FollowerInfo) {
 						: 'Что-то пошло не так. Попробуйте позже.',
 				variant: 'destructive'
 			})
+		},
+		onSuccess() {
+			toast({
+				description: queryData.data.isFollowedByUser
+					? 'Вы подписались на пользователя'
+					: 'Вы отписались от пользователя'
+			})
 		}
 	})
 
