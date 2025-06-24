@@ -1,5 +1,6 @@
 import {
 	InfiniteData,
+	QueryFilters,
 	useMutation,
 	useQueryClient
 } from '@tanstack/react-query'
@@ -15,6 +16,12 @@ import { useRouter, usePathname } from 'next/navigation'
  * и обновления кэша react-query
  * @property {useQueryClient} - хук useQueryClient, который используется для обновления кэша react-query
  * @property {useToast} - пользовательский хук useToast, который используется для отображения уведомления
+ * @property {useRouter} - хук useRouter из next/navigation, который используется для навигации после удаления поста
+ * @property {usePathname} - хук usePathname из next/navigation, который используется для получения текущего пути
+ * @type {PostsPage} - тип страницы постов, который используется для обновления кэша react-query
+ * @type {QueryFilters} - тип фильтров запросов, который используется для обновления кэша react-query
+ * @returns {useMutation} - возвращает объект с функцией мутации, которая используется для отправки запроса на сервер
+ * и обновления кэша react-query
  */
 
 export function useDeletePostMutation() {
@@ -28,7 +35,7 @@ export function useDeletePostMutation() {
 	const mutation = useMutation({
 		mutationFn: deletePost,
 		onSuccess: async deletedPost => {
-			const queryFilter = { queryKey: ['post-feed'] }
+			const queryFilter: QueryFilters = { queryKey: ['post-feed'] }
 
 			await queryClient.cancelQueries(queryFilter)
 
