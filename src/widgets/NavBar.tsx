@@ -19,6 +19,7 @@ const NavBar = () => {
 						src={logo}
 						alt='Logo'
 						width={60}
+						priority
 						className='aspect-auto h-fit flex-none object-cover '
 					/>
 				</Link>
