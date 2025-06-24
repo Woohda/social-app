@@ -40,7 +40,7 @@ const WhoToFollow = async () => {
 	})
 
 	return (
-		<div className='flex flex-col gap-5 rounded-2xl bg-card p-5 shadow-sm'>
+		<article className='flex flex-col gap-5 rounded-2xl bg-card p-5 shadow-sm'>
 			<h2 className='text-lg font-bold'>Возможно, вы знакомы</h2>
 			{usersFollowed.map(user => (
 				<div key={user.id} className='flex items-center justify-between gap-3'>
@@ -69,7 +69,7 @@ const WhoToFollow = async () => {
 					/>
 				</div>
 			))}
-		</div>
+		</article>
 	)
 }
 
@@ -99,7 +99,7 @@ const getTrendingTopics = unstable_cache(
 const TrendsTopics = async () => {
 	const trendsTopics = await getTrendingTopics()
 	return (
-		<div className='flex flex-col gap-3 rounded-2xl bg-card p-5 shadow-sm'>
+		<article className='flex flex-col gap-3 rounded-2xl bg-card p-5 shadow-sm'>
 			<h2 className='text-lg font-bold'>Трендовые обсуждения</h2>
 			{trendsTopics.map(({ hashtag, count }) => {
 				const title = hashtag.split('#')[1]
@@ -120,7 +120,7 @@ const TrendsTopics = async () => {
 					</Link>
 				)
 			})}
-		</div>
+		</article>
 	)
 }
 
