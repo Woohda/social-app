@@ -6,6 +6,7 @@ import UserAvatar from '../UserAvatar'
 import { formatRelativeDate } from '@/lib/utils'
 import useSession from '@/hooks/use-session'
 import DeletePostButton from '@/features/DeletePostButton'
+import Linkify from '@/features/Linkify'
 
 interface PostProps {
 	post: PostData
@@ -43,7 +44,9 @@ const Post = ({ post }: PostProps) => {
 					/>
 				)}
 			</div>
-			<p className='whitespace-pre-line break-words'>{post.content}</p>
+			<Linkify>
+				<p className='whitespace-pre-line break-words'>{post.content}</p>
+			</Linkify>
 		</article>
 	)
 }
