@@ -38,7 +38,7 @@ const FollowingFeed = () => {
 	if (isSuccess && !posts.length && !hasNextPage)
 		return (
 			<p className='text-center text-muted-foreground'>
-				Постов не найдено. Подпишитесь на других пользователей, чтобы увидеть их
+				Постов не найдено. Подпишись на других пользователей, чтобы увидеть их
 				посты.
 			</p>
 		)
