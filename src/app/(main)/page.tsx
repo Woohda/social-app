@@ -10,7 +10,7 @@ export default async function Home() {
 			<div className='w-full flex flex-col gap-5'>
 				<PostEditor />
 				<Tabs defaultValue='for-you'>
-					<TabsList>
+					<TabsList className='translate-x-[100%]'>
 						<TabsTrigger value='for-you'>Лента постов</TabsTrigger>
 						<TabsTrigger value='following'>Подписки</TabsTrigger>
 					</TabsList>
