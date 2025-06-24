@@ -6,32 +6,44 @@ import { Prisma } from '@prisma/client'
  * Эти типы помогают избежать ошибок при работе с данными и обеспечивают
  * лучшую поддержку автозаполнения в редакторах кода.
  * Они также помогают поддерживать согласованность типов в приложении.
- * @property {userDataSelect} userDataSelect - Выбор данных пользователя удовлетворяющий типу Prisma.UserSelect
- * @property {postDataInclude} postDataInclude - Включение данных поста удовлетворяющий типу Prisma.PostInclude
+ * @function getUserDataSelect - Функция для получения селекта данных пользователя
+ * @function getPostDataInclude - Функция для получения включения данных поста
  * @type {PostData} PostData - Данные поста с включением данных пользователя удовлетворяющий типу Prisma.PostGetPayload
  * @property {PostPage} PostPage - Страница постов с массивом постов и курсором для пагинации
  */
 
-export const userDataSelect = {
-	id: true,
-	username: true,
-	name: true,
-	avatarUrl: true
-} satisfies Prisma.UserSelect
-
-export const postDataInclude = {
-	user: {
-		select: {
-			id: true,
-			username: true,
-			name: true,
-			avatarUrl: true
+export function getUserDataSelect(loggedInUserId: string) {
+	return {
+		id: true,
+		username: true,
+		name: true,
+		avatarUrl: true,
+		followers: {
+			where: {
+				followerId: loggedInUserId
+			},
+			select: {
+				followerId: true
+			}
+		},
+		_count: {
+			select: {
+				followers: true
+			}
 		}
-	}
-} satisfies Prisma.PostInclude
+	} satisfies Prisma.UserSelect
+}
+
+export function getPostDataInclude(loggedInUserId: string) {
+	return {
+		user: {
+			select: getUserDataSelect(loggedInUserId)
+		}
+	} satisfies Prisma.PostInclude
+}
 
 export type PostData = Prisma.PostGetPayload<{
-	include: typeof postDataInclude
+	include: ReturnType<typeof getPostDataInclude>
 }>
 
 export interface PostsPage {
