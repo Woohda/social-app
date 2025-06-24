@@ -23,7 +23,7 @@ const FeedOfPosts = () => {
 		queryFn: ({ pageParam }) =>
 			kyInstance
 				.get(
-					'api/posts/for-you',
+					'/api/posts/for-you',
 					pageParam ? { searchParams: { cursor: pageParam } } : {}
 				)
 				.json<PostsPage>(),
@@ -36,7 +36,11 @@ const FeedOfPosts = () => {
 	if (isLoading) return <PostLoadingSkeleton />
 
 	if (isSuccess && !posts.length && !hasNextPage)
-		return <p className='text-center text-muted-foreground'>Нет постов</p>
+		return (
+			<p className='p-3 shadow-sm rounded-2xl text-center text-muted-foreground bg-card'>
+				Нет постов
+			</p>
+		)
 
 	if (isError)
 		return (
