@@ -1,5 +1,5 @@
 import PostEditor from '@/features/PostEditor/PostEditor'
-import FeedYouPosts from '@/features/FeedYouPosts'
+import FeedOfPosts from '@/widgets/Posts/FeedOfPosts'
 import TrendsSidebar from '@/widgets/TrendsSidebar'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import FollowingFeed from '@/features/FollowingFeed'
@@ -15,7 +15,7 @@ export default async function Home() {
 						<TabsTrigger value='following'>Подписки</TabsTrigger>
 					</TabsList>
 					<TabsContent value='for-you'>
-						<FeedYouPosts />
+						<FeedOfPosts />
 					</TabsContent>
 					<TabsContent value='following'>
 						<FollowingFeed />

@@ -8,7 +8,7 @@ import kyInstance from '@/lib/ky'
 import InfiniteScrollContainer from '@/components/InfiniteScrollContainer'
 import PostLoadingSkeleton from '@/components/Post/PostLoadingSkeleton'
 
-const FeedYouPosts = () => {
+const FeedOfPosts = () => {
 	const {
 		data,
 		fetchNextPage,
@@ -58,4 +58,4 @@ const FeedYouPosts = () => {
 	)
 }
 
-export default FeedYouPosts
+export default FeedOfPosts
