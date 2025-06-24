@@ -23,7 +23,7 @@ const UserProfile = ({ user, loggedInUserId }: UserProfileProps) => {
 				<div>
 					<h2 className='text-2xl font-bold'>{user.name}</h2>
 					<p className='text-sm text-muted-foreground'>@{user.username}</p>
-					<p className='text-sm mt-3'>{user.bio || ''}</p>
+					{user.bio && <p className='text-sm mt-3'>user.bio</p>}
 					<p className='text-sm text-muted-foreground'>
 						Аккаунт создан: {formatRelativeDate(user.createdAt)}
 					</p>
