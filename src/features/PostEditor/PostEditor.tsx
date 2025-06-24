@@ -57,7 +57,7 @@ const PostEditor = () => {
 				<LoadingButton
 					onClick={onSubmit}
 					disabled={!post.trim()}
-					className='min-w-20 mt-5'
+					className='min-w-20 mt-2'
 					loading={mutation.isPending}
 				>
 					Опубликовать
