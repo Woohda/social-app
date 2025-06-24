@@ -18,12 +18,12 @@ const Post = ({ post }: PostProps) => {
 		<article className='group/post flex flex-col gap-3 rounded-2xl bg-card p-5 shadow-sm'>
 			<div className='flex justify-between gap-3'>
 				<div className='flex flex-wrap gap-3'>
-					<Link href={`/user/${post.user.username}`}>
+					<Link href={`/users/${post.user.username}`}>
 						<UserAvatar avatarUrl={post.user.avatarUrl} />
 					</Link>
 					<div>
 						<Link
-							href={`/user/${post.user.username}`}
+							href={`/users/${post.user.username}`}
 							className='block font-medium hover:underline text-primary'
 						>
 							{post.user.name}
