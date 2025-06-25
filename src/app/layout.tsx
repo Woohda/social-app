@@ -5,6 +5,9 @@ import './globals.css'
 import { Toaster } from '@/components/ui/toaster'
 import React from 'react'
 import ReactQueryProvider from './ReactQueryProvider'
+import { SessionProvider } from './(main)/SessionProvider'
+import { validateRequest } from '@/auth'
+import { redirect } from 'next/navigation'
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -25,11 +28,15 @@ export const metadata: Metadata = {
 	description: 'Это социальная сеть для твоей болтовни'
 }
 
-export default function RootLayout({
+export default async function RootLayout({
 	children
 }: Readonly<{
 	children: React.ReactNode
 }>) {
+	const session = await validateRequest()
+	if (!session.user) {
+		redirect('/login')
+	}
 	return (
 		<html lang='ru' suppressHydrationWarning>
 			<body
@@ -42,7 +49,7 @@ export default function RootLayout({
 						enableSystem
 						disableTransitionOnChange
 					>
-						{children}
+						<SessionProvider value={session}> {children}</SessionProvider>
 					</ThemeProvider>
 				</ReactQueryProvider>
 				<Toaster />
