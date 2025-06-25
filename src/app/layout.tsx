@@ -5,7 +5,7 @@ import './globals.css'
 import { Toaster } from '@/components/ui/toaster'
 import React from 'react'
 import ReactQueryProvider from './ReactQueryProvider'
-import { SessionProvider } from './(main)/SessionProvider'
+import SessionProvider from './(main)/SessionProvider'
 import { validateRequest } from '@/auth'
 import { redirect } from 'next/navigation'
 
