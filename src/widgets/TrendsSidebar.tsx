@@ -8,6 +8,7 @@ import { Suspense } from 'react'
 import { unstable_cache } from 'next/cache'
 import FollowButton from '@/features/FollowButton'
 import { getUserDataSelect } from '@/lib/types'
+import UserTooltip from '@/features/UserTooltip'
 
 const TrendsSidebar = () => {
 	return (
@@ -44,20 +45,23 @@ const WhoToFollow = async () => {
 			<h2 className='text-lg font-bold'>Возможно, вы знакомы</h2>
 			{usersFollowed.map(user => (
 				<div key={user.id} className='flex items-center justify-between gap-3'>
-					<Link
-						href={`/users/${user.username}`}
-						className='flex items-center gap-3'
-					>
-						<UserAvatar avatarUrl={user.avatarUrl} className='flex-none' />
-						<div className='flex flex-col'>
-							<p className='text-sm line-clamp-1 break-all font-semibold text-foreground hover:underline'>
-								{user.name}
-							</p>
-							<p className='text-sm line-clamp-1 break-all text-muted-foreground'>
-								@{user.username}
-							</p>
-						</div>
-					</Link>
+					<UserTooltip user={user}>
+						<Link
+							href={`/users/${user.username}`}
+							className='flex items-center gap-3'
+						>
+							<UserAvatar avatarUrl={user.avatarUrl} className='flex-none' />
+							<div className='flex flex-col'>
+								<p className='text-sm line-clamp-1 break-all font-semibold text-foreground hover:underline'>
+									{user.name}
+								</p>
+								<p className='text-sm line-clamp-1 break-all text-muted-foreground'>
+									@{user.username}
+								</p>
+							</div>
+						</Link>
+					</UserTooltip>
+
 					<FollowButton
 						userId={user.id}
 						initialState={{
