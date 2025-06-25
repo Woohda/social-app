@@ -12,11 +12,9 @@ const FollowerCount = ({ userId, initialState }: FollowerCountProps) => {
 	const { data } = useFollowerInfo(userId, initialState)
 
 	return (
-		<span className='text-sm'>
+		<span>
 			Подписчиков:{' '}
-			<span className='font-semibold text-base'>
-				{formatNumber(data.followers)}
-			</span>
+			<span className='font-semibold'>{formatNumber(data.followers)}</span>
 		</span>
 	)
 }
