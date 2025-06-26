@@ -1,7 +1,7 @@
 import PostEditor from '@/features/post-editor/PostEditor'
-import FeedOfPosts from '@/widgets/Posts/FeedOfPosts'
+import FeedOfPosts from '@/widgets/posts1/FeedOfPosts'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import FollowingFeed from '@/widgets/Posts/FollowingFeed'
+import FollowingFeed from '@/widgets/posts1/FollowingFeed'
 
 export default async function Home() {
 	return (
