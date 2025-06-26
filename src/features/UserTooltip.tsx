@@ -10,7 +10,7 @@ import { FollowerInfo, UserData } from '@/lib/types'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
 import Link from 'next/link'
 import { PropsWithChildren } from 'react'
-import FollowButton from './FollowButton'
+import FollowButton from '../components/FollowButton'
 import FollowerCount from '@/components/FollowerCount'
 
 interface UserTooltipProps extends PropsWithChildren {
