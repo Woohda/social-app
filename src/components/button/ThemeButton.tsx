@@ -1,7 +1,7 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { Switch } from './ui/switch'
+import { Switch } from '../ui/switch'
 import { MoonIcon, SunIcon } from 'lucide-react'
 
 const ThemeButton = () => {

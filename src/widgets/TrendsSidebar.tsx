@@ -6,7 +6,7 @@ import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { unstable_cache } from 'next/cache'
-import FollowButton from '@/components/FollowButton'
+import FollowButton from '@/components/button/FollowButton'
 import { getUserDataSelect } from '@/lib/types'
 import UserTooltip from '@/features/UserTooltip'
 

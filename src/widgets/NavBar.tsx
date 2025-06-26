@@ -8,9 +8,12 @@ import UserButton from '@/components/user/UserButton'
 import logo from '@/assets/logo.png'
 
 const NavBar = () => {
-	const ThemeButtonNoSSR = dynamic(() => import('@/components/ThemeButton'), {
-		ssr: false
-	})
+	const ThemeButtonNoSSR = dynamic(
+		() => import('@/components/button/ThemeButton'),
+		{
+			ssr: false
+		}
+	)
 	return (
 		<header className='sticky top-0 z-50 w-full border-b bg-card shadow-sm'>
 			<nav className='mx-auto max-w-7xl flex items-center flex-wrap gap-5 py-3 px-5'>

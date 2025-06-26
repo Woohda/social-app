@@ -7,7 +7,7 @@ import {
 	DialogHeader,
 	DialogTitle
 } from '../ui/dialog'
-import LoadingButton from '../LoadingButton'
+import LoadingButton from '../button/LoadingButton'
 import { Button } from '../ui/button'
 
 interface DeletePostDialogProps {

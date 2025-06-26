@@ -1,7 +1,7 @@
 import { FollowerInfo, UserData } from '@/lib/types'
 import UserAvatar from './UserAvatar'
 import { formatNumber, formatRelativeDate } from '@/lib/utils'
-import FollowButton from '@/components/FollowButton'
+import FollowButton from '@/components/button/FollowButton'
 import FollowerCount from '../FollowerCount'
 
 interface UserProfileProps {

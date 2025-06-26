@@ -7,7 +7,7 @@ import useSession from '@/hooks/use-session'
 import UserAvatar from '@/components/user/UserAvatar'
 import './style.css'
 import { useCreatePostMutation } from '@/hooks/use-createPostMutation'
-import LoadingButton from '@/components/LoadingButton'
+import LoadingButton from '@/components/button/LoadingButton'
 
 const PostEditor = () => {
 	const { user } = useSession()
