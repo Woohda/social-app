@@ -3,10 +3,10 @@
 import { PostsPage } from '@/lib/types'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
-import Post from '@/components/post1/Post'
+import Post from '@/components/post/Post'
 import kyInstance from '@/lib/ky'
 import InfiniteScrollContainer from '@/components/InfiniteScrollContainer'
-import PostLoadingSkeleton from '@/components/post1/PostLoadingSkeleton'
+import PostLoadingSkeleton from '@/components/post/PostLoadingSkeleton'
 
 interface UserPostsFeedProps {
 	userId: string
