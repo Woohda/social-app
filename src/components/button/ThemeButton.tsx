@@ -1,7 +1,6 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { Switch } from '../ui/switch'
 import { MoonIcon, SunIcon } from 'lucide-react'
 
 const ThemeButton = () => {
@@ -9,17 +8,17 @@ const ThemeButton = () => {
 
 	return (
 		<div className='flex items-center relative'>
-			{theme === 'light' && (
-				<SunIcon className='mr-2 size-4 absolute left-[3.5px] z-10 stroke-orange-400' />
-			)}
-			<Switch
-				checked={theme === 'dark'}
-				onCheckedChange={checked => setTheme(checked ? 'dark' : 'light')}
+			<button
+				className='flex items-center justify-center border border-transparent rounded-full hover:border-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring'
 				aria-label='Toggle theme'
-			/>
-			{theme === 'dark' && (
-				<MoonIcon className='mr-2 size-4 absolute right-[-4px] z-10' />
-			)}
+				onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+			>
+				{theme === 'light' ? (
+					<SunIcon className='size-5 stroke-orange-400' />
+				) : (
+					<MoonIcon className='size-5 stroke-white' />
+				)}
+			</button>
 		</div>
 	)
 }
