@@ -48,3 +48,10 @@ export type LoginValues = z.infer<typeof loginSchema>
 export const createPostSchema = z.object({
 	content: requiredString
 })
+
+export const updateUserProfileSchema = z.object({
+	name: requiredString,
+	bio: z.string().max(200, 'Биография не должна превышать 200 символов')
+})
+
+export type UpdateUserProfileValues = z.infer<typeof updateUserProfileSchema>
