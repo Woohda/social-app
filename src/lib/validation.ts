@@ -21,7 +21,7 @@ const requiredString = z
 
 export const signUpSchema = z.object({
 	email: requiredString.email('Введите корректный email'),
-	name: requiredString,
+	name: requiredString.max(30, 'Имя не должно превышать 25 символов'),
 	username: requiredString
 		.min(3, 'Имя пользователя должно содержать минимум 3 символа')
 		.regex(
@@ -50,7 +50,7 @@ export const createPostSchema = z.object({
 })
 
 export const updateUserProfileSchema = z.object({
-	name: requiredString,
+	name: requiredString.max(25, 'Имя не должно превышать 25 символов'),
 	bio: z.string().max(200, 'Биография не должна превышать 200 символов')
 })
 
