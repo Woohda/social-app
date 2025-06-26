@@ -47,7 +47,7 @@ export async function signUp(
 			data: {
 				id: userId,
 				email,
-				username: username.toLowerCase(),
+				username,
 				passwordHash,
 				name
 			}
