@@ -57,11 +57,9 @@ export function useFollowerInfo(userId: string, initialState: FollowerInfo) {
 		},
 		onError: (error, variables, context) => {
 			query.setQueryData<FollowerInfo>(queryKey, context?.prevState)
+			console.log(error)
 			toast({
-				description:
-					error instanceof Error
-						? error.message
-						: 'Что-то пошло не так. Попробуйте позже.',
+				description: 'Что-то пошло не так. Попробуйте позже.',
 				variant: 'destructive'
 			})
 		},
