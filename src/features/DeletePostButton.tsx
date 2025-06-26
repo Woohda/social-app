@@ -1,5 +1,5 @@
 import DeleteButton from '@/components/DeleteButton'
-import DeletePostDialog from '@/components/Post/DeletePostDialog'
+import DeletePostDialog from '@/components/post1/DeletePostDialog'
 import { PostData } from '@/lib/types'
 import { useState } from 'react'
 

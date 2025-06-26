@@ -3,10 +3,10 @@
 import { PostsPage } from '@/lib/types'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
-import Post from '@/components/Post/Post'
+import Post from '@/components/post1/Post'
 import kyInstance from '@/lib/ky'
 import InfiniteScrollContainer from '@/components/InfiniteScrollContainer'
-import PostLoadingSkeleton from '@/components/Post/PostLoadingSkeleton'
+import PostLoadingSkeleton from '@/components/post1/PostLoadingSkeleton'
 
 const FeedOfPosts = () => {
 	const {
