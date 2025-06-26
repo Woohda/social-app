@@ -5,7 +5,7 @@ import {
 	useQueryClient
 } from '@tanstack/react-query'
 import { useToast } from './use-toast'
-import { createPost } from '@/features/PostEditor/actions'
+import { createPost } from '@/features/post-editor/actions'
 import { PostsPage } from '@/lib/types'
 import useSession from './use-session'
 

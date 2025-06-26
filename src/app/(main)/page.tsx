@@ -1,4 +1,4 @@
-import PostEditor from '@/features/PostEditor/PostEditor'
+import PostEditor from '@/features/post-editor/PostEditor'
 import FeedOfPosts from '@/widgets/Posts/FeedOfPosts'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import FollowingFeed from '@/widgets/Posts/FollowingFeed'

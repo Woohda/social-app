@@ -5,7 +5,7 @@ import {
 	useQueryClient
 } from '@tanstack/react-query'
 import { useToast } from './use-toast'
-import { deletePost } from '@/features/PostEditor/actions'
+import { deletePost } from '@/features/post-editor/actions'
 import { PostsPage } from '@/lib/types'
 import { useRouter, usePathname } from 'next/navigation'
 
