@@ -3,6 +3,7 @@ import UserAvatar from './UserAvatar'
 import { formatNumber, formatRelativeDate } from '@/lib/utils'
 import FollowButton from '@/components/button/FollowButton'
 import FollowerCount from '../FollowerCount'
+import EditProfileButton from '../button/EditProfileButton'
 
 interface UserProfileProps {
 	user: UserData
@@ -42,7 +43,7 @@ const UserProfile = ({ user, loggedInUserId }: UserProfileProps) => {
 					</span>
 				</div>
 				{user.id === loggedInUserId ? (
-					<span className='text-sm text-muted-foreground'>Это вы</span>
+					<EditProfileButton user={user} />
 				) : (
 					<FollowButton userId={user.id} initialState={followerInfo} />
 				)}
