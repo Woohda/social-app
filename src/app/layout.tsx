@@ -8,6 +8,9 @@ import ReactQueryProvider from './ReactQueryProvider'
 import SessionProvider from './(main)/SessionProvider'
 import { validateRequest } from '@/auth'
 import { redirect } from 'next/navigation'
+import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin'
+import { extractRouterConfig } from 'uploadthing/server'
+import { fileRouter } from './api/uploadthing/core'
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -42,6 +45,7 @@ export default async function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`}
 			>
+				<NextSSRPlugin routerConfig={extractRouterConfig(fileRouter)} />
 				<ReactQueryProvider>
 					<ThemeProvider
 						attribute='class'
