@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function Page() {
 	return (
 		<main className='flex h-screen items-center justify-center'>
-			<div className='flex gap-4 w-full max-w-[40rem] p-10 flex-col items-center justify-center border-e border-solid rounded-3xl bg-card shadow-2xl'>
+			<div className='flex gap-4 w-full max-w-[30rem] p-10 flex-col items-center justify-center border-e border-solid rounded-3xl bg-card shadow-2xl'>
 				<h1 className='text-3xl font-bold'>Регистрация</h1>
 				<p className='text-xs text-center text-muted-foreground'>
 					Болтовня - это социальная сеть для твоей болтовни. <br />
