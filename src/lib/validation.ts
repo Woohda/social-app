@@ -21,13 +21,14 @@ const requiredString = z
 
 export const signUpSchema = z.object({
 	email: requiredString.email('Введите корректный email'),
-	name: requiredString.max(30, 'Имя не должно превышать 25 символов'),
+	name: requiredString.max(30, 'Имя не должно превышать 30 символов'),
 	username: requiredString
 		.min(3, 'Имя пользователя должно содержать минимум 3 символа')
 		.regex(
 			/^[a-zA-Z0-9_]+$/,
 			'Имя пользователя может содержать только латинские буквы, цифры и символ _'
-		),
+		)
+		.transform(val => val.toLowerCase()),
 	password: requiredString
 		.min(8, 'Пароль должен содержать минимум 8 символов')
 		.regex(
@@ -50,8 +51,8 @@ export const createPostSchema = z.object({
 })
 
 export const updateUserProfileSchema = z.object({
-	name: requiredString.max(25, 'Имя не должно превышать 25 символов'),
-	bio: z.string().max(200, 'Биография не должна превышать 200 символов')
+	name: requiredString.max(30, 'Имя не должно превышать 30 символов'),
+	bio: z.string().trim().max(150, 'Биография не должна превышать 150 символов')
 })
 
 export type UpdateUserProfileValues = z.infer<typeof updateUserProfileSchema>
