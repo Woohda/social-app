@@ -5,7 +5,7 @@ import Link from 'next/link'
 import UserAvatar from '../user/UserAvatar'
 import { formatRelativeDate } from '@/lib/utils'
 import useSession from '@/hooks/use-session'
-import DeletePostButton from '@/features/DeletePostButton'
+import DeletePostButton from '@/components/post/DeletePostButton'
 import Linkify from '@/features/Linkify'
 import UserTooltip from '@/features/UserTooltip'
 
