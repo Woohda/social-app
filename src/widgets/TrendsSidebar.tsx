@@ -48,11 +48,14 @@ const WhoToFollow = async () => {
 					<UserTooltip user={user}>
 						<Link
 							href={`/users/${user.username}`}
-							className='flex items-center gap-3'
+							className='flex items-center gap-3 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring'
 						>
-							<UserAvatar avatarUrl={user.avatarUrl} className='flex-none' />
+							<UserAvatar
+								avatarUrl={user.avatarUrl}
+								className='flex-none border border-transparent rounded-full hover:border-primary transition-colors duration-200'
+							/>
 							<div className='flex flex-col'>
-								<p className='text-sm line-clamp-1 break-all font-semibold text-foreground hover:underline'>
+								<p className='text-sm line-clamp-1 break-all font-semibold text-foreground hover:underline hover:text-primary'>
 									{user.name}
 								</p>
 								<p className='text-sm line-clamp-1 break-all text-muted-foreground'>

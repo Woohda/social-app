@@ -50,7 +50,7 @@ const PostEditor = () => {
 				/>
 				<EditorContent
 					editor={editor}
-					className='w-full max-h-[20rem] overflow-y-auto bg-background rounded-2xl px-5 py-3 focus:outline-none'
+					className='w-full max-h-[20rem] overflow-y-auto bg-background rounded-2xl px-5 py-3 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:border-primary'
 				/>
 			</div>
 			<div className='flex justify-end'>

@@ -21,22 +21,28 @@ const Post = ({ post }: PostProps) => {
 			<div className='flex justify-between gap-3'>
 				<div className='flex flex-wrap gap-3'>
 					<UserTooltip user={post.user}>
-						<Link href={`/users/${post.user.username}`}>
-							<UserAvatar avatarUrl={post.user.avatarUrl} />
+						<Link
+							href={`/users/${post.user.username}`}
+							className='focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring'
+						>
+							<UserAvatar
+								avatarUrl={post.user.avatarUrl}
+								className='border border-transparent rounded-full hover:border-primary transition-colors duration-200'
+							/>
 						</Link>
 					</UserTooltip>
 					<div>
 						<UserTooltip user={post.user}>
 							<Link
 								href={`/users/${post.user.username}`}
-								className='block font-medium hover:underline text-primary'
+								className='block font-medium hover:underline text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring'
 							>
 								{post.user.name}
 							</Link>
 						</UserTooltip>
 						<Link
 							href={`/posts/${post.id}`}
-							className='block text-sm text-muted-foreground hover:underline'
+							className='block text-sm text-muted-foreground hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring'
 						>
 							{formatRelativeDate(post.createdAt)}
 						</Link>

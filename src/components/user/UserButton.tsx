@@ -27,7 +27,12 @@ const UserButton = ({ className }: UserButtonProps) => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<button className={cn('flex-none rounded-full', className)}>
+				<button
+					className={cn(
+						'flex-none border border-transparent rounded-full hover:border-primary transition-colors duration-200  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+						className
+					)}
+				>
 					<UserAvatar avatarUrl={user?.avatar} size={40} />
 				</button>
 			</DropdownMenuTrigger>
