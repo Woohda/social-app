@@ -8,7 +8,7 @@ import {
 } from '@tanstack/react-query'
 import { useUploadThing } from '@/lib/uploadthing'
 import { UpdateUserProfileValues } from '@/lib/validation'
-import { updateUserProfile } from '@/app/(main)/users/[username]/actions'
+import { updateUserProfile } from '@/features/edit-profile/actions'
 import { PostsPage } from '@/lib/types'
 
 /**
