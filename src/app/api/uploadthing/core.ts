@@ -6,7 +6,7 @@ const f = createUploadthing()
 
 export const fileRouter = {
 	avatar: f({
-		image: { maxFileSize: '1MB' }
+		image: { maxFileSize: '1MB', maxFileCount: 1 }
 	})
 		.middleware(async () => {
 			const { user } = await validateRequest()
@@ -16,10 +16,7 @@ export const fileRouter = {
 			return { user }
 		})
 		.onUploadComplete(async ({ metadata, file }) => {
-			const newAvatarUrl = file.url.replace(
-				'file',
-				`/a/${process.env.UPLOADTHING_TOKEN}`
-			)
+			const newAvatarUrl = file.ufsUrl
 			await prisma.user.update({
 				where: { id: metadata.user.id },
 				data: { avatarUrl: newAvatarUrl }
