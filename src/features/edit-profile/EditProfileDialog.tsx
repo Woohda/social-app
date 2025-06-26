@@ -1,5 +1,4 @@
 import LoadingButton from '@/components/button/LoadingButton'
-import { Button } from '@/components/ui/button'
 import {
 	Dialog,
 	DialogContent,
@@ -24,7 +23,10 @@ import {
 	UpdateUserProfileValues
 } from '@/lib/validation'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import AvatarInput from './AvatarInput'
+import avatarPlaceholder from '@/assets/avatar-placeholder.png'
 
 interface EditProfileDialogProps {
 	user: UserData
@@ -47,13 +49,22 @@ const EditProfileDialog = ({
 
 	const mutation = useUpdateProfileMutation()
 
+	const [croppedAvatar, setCroppedAvatar] = useState<Blob | null>(null)
+
 	async function onSubmit(values: UpdateUserProfileValues) {
+		const newAvatarFile = croppedAvatar
+			? new File([croppedAvatar], `avatar_${user.id}.webp`, {
+					type: 'image/webp'
+				})
+			: undefined
 		mutation.mutate(
 			{
-				values
+				values,
+				avatar: newAvatarFile
 			},
 			{
 				onSuccess: () => {
+					setCroppedAvatar(null)
 					onOpenChange(false)
 				}
 			}
@@ -64,13 +75,24 @@ const EditProfileDialog = ({
 		<Dialog open={open} onOpenChange={onOpenChange}>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Изменить профиль</DialogTitle>
+					<DialogTitle>Изменить профиль:</DialogTitle>
 				</DialogHeader>
-				<DialogContent>
+				<div className='flex gap-5 items'>
+					<div className='mt-3'>
+						<AvatarInput
+							src={
+								croppedAvatar
+									? URL.createObjectURL(croppedAvatar)
+									: user.avatarUrl || avatarPlaceholder
+							}
+							onImageCropped={setCroppedAvatar}
+						/>
+					</div>
+
 					<Form {...form}>
 						<form
 							onSubmit={form.handleSubmit(onSubmit)}
-							className='flex flex-col gap-3'
+							className='flex flex-col gap-3 w-full'
 						>
 							<FormField
 								control={form.control}
@@ -106,17 +128,10 @@ const EditProfileDialog = ({
 								<LoadingButton type='submit' loading={mutation.isPending}>
 									Сохранить
 								</LoadingButton>
-								<Button
-									type='button'
-									variant='outline'
-									onClick={() => onOpenChange(false)}
-								>
-									Отменить
-								</Button>
 							</DialogFooter>
 						</form>
 					</Form>
-				</DialogContent>
+				</div>
 			</DialogContent>
 		</Dialog>
 	)

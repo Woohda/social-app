@@ -38,7 +38,6 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`}
 			>
-				<NextSSRPlugin routerConfig={extractRouterConfig(fileRouter)} />
 				<ReactQueryProvider>
 					<ThemeProvider
 						attribute='class'
@@ -46,6 +45,7 @@ export default function RootLayout({
 						enableSystem
 						disableTransitionOnChange
 					>
+						<NextSSRPlugin routerConfig={extractRouterConfig(fileRouter)} />
 						{children}
 					</ThemeProvider>
 				</ReactQueryProvider>

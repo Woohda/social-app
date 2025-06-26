@@ -1,23 +1,20 @@
 'use client'
 
 import SearchField from '@/components/SearchField'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
 import UserButton from '@/components/user/UserButton'
 import logo from '@/assets/logo.png'
+import ThemeButton from '@/components/button/ThemeButton'
 
 const NavBar = () => {
-	const ThemeButtonNoSSR = dynamic(
-		() => import('@/components/button/ThemeButton'),
-		{
-			ssr: false
-		}
-	)
 	return (
 		<header className='sticky top-0 z-50 w-full border-b bg-card shadow-sm'>
 			<nav className='mx-auto max-w-7xl flex items-center flex-wrap gap-5 py-3 px-5'>
-				<Link href='/' className='text-xl font-bold text-primary'>
+				<Link
+					href='/'
+					className='text-xl font-bold text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring'
+				>
 					<Image
 						src={logo}
 						alt='Logo'
@@ -28,7 +25,7 @@ const NavBar = () => {
 				</Link>
 				<SearchField />
 				<UserButton className='sm:ms-auto' />
-				<ThemeButtonNoSSR />
+				<ThemeButton />
 			</nav>
 		</header>
 	)

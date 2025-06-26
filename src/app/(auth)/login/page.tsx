@@ -14,7 +14,10 @@ export default function Page() {
 				<LoginForm />
 				<span className='text-xs text-muted-foreground'>
 					У тебя нет аккаунта?{' '}
-					<Link href='/signup' className='hover:text-primary hover:underline'>
+					<Link
+						href='/signup'
+						className='hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring'
+					>
 						Зарегистрироваться
 					</Link>
 				</span>

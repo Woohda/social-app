@@ -19,7 +19,7 @@ const UserProfile = ({ user, loggedInUserId }: UserProfileProps) => {
 	}
 	return (
 		<div className='flex flex-col gap-5 rounded-2xl bg-card p-5 shadow-sm'>
-			<div className='flex flex-wrap items-center gap-5'>
+			<div className='flex flex-nowrap items-center gap-5'>
 				<UserAvatar avatarUrl={user.avatarUrl} size={150} />
 				<div className='flex flex-col items-start gap-1'>
 					<h2 className='text-2xl font-bold'>{user.name}</h2>
@@ -27,7 +27,7 @@ const UserProfile = ({ user, loggedInUserId }: UserProfileProps) => {
 					<p className='text-sm'>
 						<FollowerCount userId={user.id} initialState={followerInfo} />
 					</p>
-					{user.bio && <p className='text-sm mt-3'>user.bio</p>}
+					{user.bio && <p className='text-sm mt-1 break-all'>{user.bio}</p>}
 				</div>
 			</div>
 			<div className='w-full flex items-center justify-between'>

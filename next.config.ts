@@ -11,8 +11,8 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'utfs.io',
-				pathname: `/a/${process.env.UPLOADTHING_TOKEN}`
+				hostname: '**.ufs.sh', // поддомены uploadthing
+				pathname: '/f/*'
 			}
 		]
 	}

@@ -68,7 +68,7 @@ export function useUpdateProfileMutation() {
 										...post,
 										user: {
 											...updatedUser,
-											avatar: newAvatarUrl
+											avatar: newAvatarUrl || updatedUser.avatarUrl
 										}
 									}
 								}
@@ -93,5 +93,6 @@ export function useUpdateProfileMutation() {
 			})
 		}
 	})
+
 	return mutation
 }
