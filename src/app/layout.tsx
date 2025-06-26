@@ -5,9 +5,6 @@ import './globals.css'
 import { Toaster } from '@/components/ui/toaster'
 import React from 'react'
 import ReactQueryProvider from './ReactQueryProvider'
-import SessionProvider from './(main)/SessionProvider'
-import { validateRequest } from '@/auth'
-import { redirect } from 'next/navigation'
 import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin'
 import { extractRouterConfig } from 'uploadthing/server'
 import { fileRouter } from './api/uploadthing/core'
@@ -31,15 +28,11 @@ export const metadata: Metadata = {
 	description: 'Это социальная сеть для твоей болтовни'
 }
 
-export default async function RootLayout({
+export default function RootLayout({
 	children
 }: Readonly<{
 	children: React.ReactNode
 }>) {
-	const session = await validateRequest()
-	if (!session.user) {
-		redirect('/login')
-	}
 	return (
 		<html lang='ru' suppressHydrationWarning>
 			<body
@@ -53,7 +46,7 @@ export default async function RootLayout({
 						enableSystem
 						disableTransitionOnChange
 					>
-						<SessionProvider value={session}> {children}</SessionProvider>
+						{children}
 					</ThemeProvider>
 				</ReactQueryProvider>
 				<Toaster />
