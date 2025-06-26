@@ -1,5 +1,5 @@
 import { validateRequest } from '@/auth'
-import UserProfile from '@/components/UserProfile'
+import UserProfile from '@/components/user/UserProfile'
 import prisma from '@/lib/prisma'
 import { getUserDataSelect } from '@/lib/types'
 import UserPostsFeed from '@/widgets/Posts/UserPostsFeed'

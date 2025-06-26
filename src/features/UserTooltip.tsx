@@ -4,7 +4,7 @@ import {
 	TooltipContent,
 	TooltipTrigger
 } from '@/components/ui/tooltip'
-import UserAvatar from '@/components/UserAvatar'
+import UserAvatar from '@/components/user/UserAvatar'
 import useSession from '@/hooks/use-session'
 import { FollowerInfo, UserData } from '@/lib/types'
 import { TooltipProvider } from '@radix-ui/react-tooltip'

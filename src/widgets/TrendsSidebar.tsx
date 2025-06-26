@@ -1,5 +1,5 @@
 import { validateRequest } from '@/auth'
-import UserAvatar from '@/components/UserAvatar'
+import UserAvatar from '@/components/user/UserAvatar'
 import prisma from '@/lib/prisma'
 import { formatNumber } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'

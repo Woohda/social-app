@@ -2,7 +2,7 @@
 
 import type { PostData } from '@/lib/types'
 import Link from 'next/link'
-import UserAvatar from '../UserAvatar'
+import UserAvatar from '../user/UserAvatar'
 import { formatRelativeDate } from '@/lib/utils'
 import useSession from '@/hooks/use-session'
 import DeletePostButton from '@/features/DeletePostButton'

@@ -4,7 +4,7 @@ import SearchField from '@/components/SearchField'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
-import UserButton from '@/components/UserButton'
+import UserButton from '@/components/user/UserButton'
 import logo from '@/assets/logo.png'
 
 const NavBar = () => {

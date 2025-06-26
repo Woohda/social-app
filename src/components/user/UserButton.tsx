@@ -9,7 +9,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import UserAvatar from '@/components/UserAvatar'
+import UserAvatar from '@/components/user/UserAvatar'
 import Link from 'next/link'
 import { LogOutIcon, UserIcon } from 'lucide-react'
 import { logout } from '@/app/(auth)/actions'
