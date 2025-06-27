@@ -44,7 +44,7 @@ const PostEditor = () => {
 		<div className='flex flex-col gap-5 rounded-2xl bg-card p-5 shadow-sm'>
 			<div className='flex gap-5'>
 				<UserAvatar
-					avatarUrl={user?.avatar}
+					avatarUrl={user?.avatarUrl}
 					size={40}
 					className='hidden sm:inline'
 				/>

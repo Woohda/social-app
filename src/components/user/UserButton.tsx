@@ -33,12 +33,12 @@ const UserButton = ({ className }: UserButtonProps) => {
 						className
 					)}
 				>
-					<UserAvatar avatarUrl={user?.avatar} size={40} />
+					<UserAvatar avatarUrl={user?.avatarUrl} size={40} />
 				</button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='w-48'>
 				<DropdownMenuLabel className='flex items-center gap-2'>
-					<UserAvatar avatarUrl={user?.avatar} size={40} /> {user?.username}
+					<UserAvatar avatarUrl={user?.avatarUrl} size={40} /> {user?.username}
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<Link href={`/users/${user?.username}`}>
