@@ -1,6 +1,7 @@
 import { validateRequest } from '@/auth'
 import prisma from '@/lib/prisma'
 import { createUploadthing, FileRouter } from 'uploadthing/next'
+import { UploadThingError, UTApi } from 'uploadthing/server'
 
 const f = createUploadthing()
 
@@ -11,11 +12,16 @@ export const fileRouter = {
 		.middleware(async () => {
 			const { user } = await validateRequest()
 			if (!user) {
-				throw new Response('Пользователь не авторизован', { status: 401 })
+				throw new UploadThingError('Пользователь не авторизован')
 			}
 			return { user }
 		})
 		.onUploadComplete(async ({ metadata, file }) => {
+			const oldAvatarUrl = metadata.user.avatarUrl
+			if (oldAvatarUrl) {
+				const key = oldAvatarUrl.split('f/').pop()
+				await new UTApi().deleteFiles(key as string)
+			}
 			const newAvatarUrl = file.ufsUrl
 			await prisma.user.update({
 				where: { id: metadata.user.id },
