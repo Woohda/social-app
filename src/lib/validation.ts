@@ -47,7 +47,8 @@ export const loginSchema = z.object({
 export type LoginValues = z.infer<typeof loginSchema>
 
 export const createPostSchema = z.object({
-	content: requiredString
+	content: requiredString,
+	mediaIds: z.array(z.string()).max(5, 'Максимум 5 медиафайлов').optional()
 })
 
 export const updateUserProfileSchema = z.object({

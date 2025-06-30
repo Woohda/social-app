@@ -21,20 +21,24 @@ import { createPostSchema } from '@/lib/validation'
  * 4. Удаляет пост из базы данных и возвращает удаленный пост с включением данных о пользователе и других связанных сущностях.
  *
  */
-export async function createPost(post: string) {
+export async function createPost(post: {
+	content: string
+	mediaIds?: string[]
+}) {
 	const { user } = await validateRequest()
 	if (!user) {
 		throw new Error('Вы не авторизованы')
 	}
 
-	const { content } = createPostSchema.parse({
-		content: post
-	})
+	const { content, mediaIds } = createPostSchema.parse(post)
 
 	const newPost = await prisma.post.create({
 		data: {
 			content,
-			userId: user.id
+			userId: user.id,
+			attachments: {
+				connect: mediaIds?.map(id => ({ id }))
+			}
 		},
 		include: getPostDataInclude(user.id)
 	})

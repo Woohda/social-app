@@ -43,7 +43,7 @@ export const lucia = new Lucia(adapter, {
 		return {
 			id: databaseUserAttributes.id,
 			username: databaseUserAttributes.username,
-			avatar: databaseUserAttributes.avatarUrl,
+			avatarUrl: databaseUserAttributes.avatarUrl,
 			googleId: databaseUserAttributes.googleId,
 			githubId: databaseUserAttributes.githubId
 		}
