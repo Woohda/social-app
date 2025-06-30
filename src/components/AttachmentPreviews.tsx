@@ -14,9 +14,9 @@ const AttachmentsPreviews = ({
 	return (
 		<div
 			className={cn(
-				'flex flex-wrap',
-				!attachment.length && 'hidden',
-				attachment.length > 1 && 'sm-grid sm:grid-cols-2'
+				'flex gap-2',
+				!attachment.length && 'hidden'
+				// attachment.length > 1 && 'sm-grid sm:grid-cols-2'
 			)}
 		>
 			{attachment.map(attachment => (
