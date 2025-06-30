@@ -8,6 +8,7 @@ import useSession from '@/hooks/use-session'
 import DeletePostButton from '@/components/post/DeletePostButton'
 import Linkify from '@/features/Linkify'
 import UserTooltip from '@/features/UserTooltip'
+import MediaPreviews from './MediaPreviews'
 
 interface PostProps {
 	post: PostData
@@ -58,6 +59,9 @@ const Post = ({ post }: PostProps) => {
 			<Linkify>
 				<p className='whitespace-pre-line break-words'>{post.content}</p>
 			</Linkify>
+			{post.attachments.length > 0 && (
+				<MediaPreviews attachments={post.attachments} />
+			)}
 		</article>
 	)
 }
