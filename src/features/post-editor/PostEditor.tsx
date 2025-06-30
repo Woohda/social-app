@@ -12,6 +12,8 @@ import { useMediaUpload } from '@/hooks/use-mediaUpload'
 import AddAttachmentsButton from '@/components/button/AddAttachmentsButton'
 import AttachmentsPreviews from '@/components/AttachmentPreviews'
 import { Loader2 } from 'lucide-react'
+import { useDropzone } from '@uploadthing/react'
+import { cn } from '@/lib/utils'
 
 const PostEditor = () => {
 	const { user } = useSession()
@@ -26,6 +28,13 @@ const PostEditor = () => {
 		removeAttachment,
 		resetMediaUploads
 	} = useMediaUpload()
+
+	const { getRootProps, getInputProps, isDragActive } = useDropzone({
+		onDrop: startUpload
+	})
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const { onClick, ...dropzoneProps } = getRootProps()
 
 	const editor = useEditor({
 		immediatelyRender: false,
@@ -70,10 +79,16 @@ const PostEditor = () => {
 					size={40}
 					className='hidden sm:inline'
 				/>
-				<EditorContent
-					editor={editor}
-					className='w-full max-h-[20rem] overflow-y-auto bg-background rounded-2xl px-5 py-3 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:border-primary'
-				/>
+				<div {...dropzoneProps} className='w-full'>
+					<EditorContent
+						editor={editor}
+						className={cn(
+							'w-full max-h-[20rem] overflow-y-auto bg-background rounded-2xl px-5 py-3 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:border-primary',
+							isDragActive && 'border-2 border-dashed border-primary'
+						)}
+					/>
+					<input {...getInputProps()} />
+				</div>
 			</div>
 			{!!attachments.length && (
 				<AttachmentsPreviews
