@@ -30,6 +30,28 @@ export const fileRouter = {
 			return {
 				avatarUrl: newAvatarUrl
 			}
+		}),
+	attachment: f({
+		image: { maxFileSize: '4MB', maxFileCount: 5 },
+		video: { maxFileSize: '64MB', maxFileCount: 5 }
+	})
+		.middleware(async () => {
+			const { user } = await validateRequest()
+			if (!user) {
+				throw new UploadThingError('Пользователь не авторизован')
+			}
+			return { userId: user.id }
+		})
+		.onUploadComplete(async ({ metadata, file }) => {
+			const media = await prisma.media.create({
+				data: {
+					url: file.ufsUrl,
+					type: file.type.startsWith('IMAGE') ? 'IMAGE' : 'VIDEO'
+				}
+			})
+			return {
+				mediaId: media.id
+			}
 		})
 } satisfies FileRouter
 
