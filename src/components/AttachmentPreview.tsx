@@ -26,7 +26,7 @@ const AttachmentsPreview = ({
 			) : (
 				<video
 					controls
-					className='size-fit h-20 aspect-square object-cover  rounded-2xl'
+					className='size-fit h-20 aspect-video object-cover rounded-2xl'
 				>
 					<source src={src} type={file.type} />
 				</video>
