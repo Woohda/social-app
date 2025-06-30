@@ -94,7 +94,7 @@ const PostEditor = () => {
 				/>
 				<LoadingButton
 					onClick={onSubmit}
-					disabled={!post.trim() || isUploading}
+					disabled={!post.trim() || attachments.length > 5 || isUploading}
 					className='min-w-20'
 					loading={mutation.isPending}
 				>

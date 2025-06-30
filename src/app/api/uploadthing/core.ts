@@ -42,11 +42,11 @@ export const fileRouter = {
 			}
 			return { userId: user.id }
 		})
-		.onUploadComplete(async ({ metadata, file }) => {
+		.onUploadComplete(async ({ file }) => {
 			const media = await prisma.media.create({
 				data: {
 					url: file.ufsUrl,
-					type: file.type.startsWith('IMAGE') ? 'IMAGE' : 'VIDEO'
+					type: file.type.startsWith('image') ? 'IMAGE' : 'VIDEO'
 				}
 			})
 			return {

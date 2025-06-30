@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useToast } from './use-toast'
 import { useUploadThing } from '@/lib/uploadthing'
+import { nanoid } from 'nanoid'
 
 /**
  * Кастомный хук для загрузки медиафайлов в базу данных
@@ -39,11 +40,9 @@ export function useMediaUpload() {
 		onBeforeUploadBegin: files => {
 			const renamedFiles = files.map(file => {
 				const extension = file.name.split('.').pop()
-				return new File(
-					[file],
-					`attachment_${crypto.randomUUID}.${extension}`,
-					{ type: file.type }
-				)
+				return new File([file], `attachment_${nanoid()}.${extension}`, {
+					type: file.type
+				})
 			})
 			setAttachments(prev => [
 				...prev,
@@ -72,8 +71,9 @@ export function useMediaUpload() {
 		},
 		onUploadError: error => {
 			setAttachments(prev => prev.filter(attachment => !attachment.isUploading))
+			console.log(error)
 			toast({
-				description: error.message,
+				description: 'Файл не был загружен, возможно он слишком большой',
 				variant: 'destructive'
 			})
 		}
@@ -87,11 +87,21 @@ export function useMediaUpload() {
 			})
 		}
 
-		if (attachments.length + file.length > 5) {
+		if (file.length > 5) {
 			toast({
 				description: 'Вы можете загрузить не более 5 файлов',
 				variant: 'destructive'
 			})
+			file.splice(5)
+		}
+
+		if (attachments.length > 1) {
+			toast({
+				description: 'Вы можете загрузить не более 5 файлов',
+				variant: 'destructive'
+			})
+			const extraFiles = 5 - attachments.length
+			file.splice(extraFiles)
 		}
 
 		startUpload(file)
