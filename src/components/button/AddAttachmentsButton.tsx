@@ -17,14 +17,15 @@ const AddAttachmentsButton = ({
 		<>
 			<Button
 				variant='ghost'
+				type='button'
 				size='icon'
-				className='text-primary hover:bg-accent hover:text-accent-foreground'
+				className='text-primary'
 				disabled={disabled}
 				onClick={() => {
 					fileInputRef.current?.click()
 				}}
 			>
-				<ImageIcon size={20} />
+				<ImageIcon />
 			</Button>
 
 			<input

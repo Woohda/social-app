@@ -81,7 +81,7 @@ const PostEditor = () => {
 					onRemoveClick={removeAttachment}
 				/>
 			)}
-			<div className='flex justify-end gap-2'>
+			<div className='flex justify-end items-center gap-2 mt-2'>
 				{isUploading && (
 					<>
 						<span className='text-sm'>{uploadProgress ?? 0}%</span>
@@ -95,7 +95,7 @@ const PostEditor = () => {
 				<LoadingButton
 					onClick={onSubmit}
 					disabled={!post.trim() || isUploading}
-					className='min-w-20 mt-2'
+					className='min-w-20'
 					loading={mutation.isPending}
 				>
 					Опубликовать
