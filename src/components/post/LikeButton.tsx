@@ -1,7 +1,7 @@
 'use client'
 
 import { LikeInfo } from '@/lib/types'
-import { useLikesInfo } from '@/hooks/use-likesInfo'
+import { useLikeInfo } from '@/hooks/use-likeInfo'
 import { HeartIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -12,7 +12,7 @@ interface LikeButtonProps {
 }
 
 const LikeButton = ({ postId, initialState, className }: LikeButtonProps) => {
-	const { data, mutate } = useLikesInfo(postId, initialState)
+	const { data, mutate } = useLikeInfo(postId, initialState)
 
 	return (
 		<button

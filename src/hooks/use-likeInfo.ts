@@ -21,7 +21,7 @@ import { useToast } from './use-toast'
  *
  */
 
-export function useLikesInfo(postId: string, initialState: LikeInfo) {
+export function useLikeInfo(postId: string, initialState: LikeInfo) {
 	const { toast } = useToast()
 
 	const query = useQueryClient()
