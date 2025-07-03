@@ -38,7 +38,7 @@ const FeedOfPosts = () => {
 	if (isSuccess && !posts.length && !hasNextPage)
 		return (
 			<p className='p-3 shadow-sm rounded-2xl text-center text-muted-foreground bg-card'>
-				Нет постов
+				Вы еще не создали ни одного поста.
 			</p>
 		)
 
