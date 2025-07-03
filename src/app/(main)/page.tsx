@@ -2,6 +2,7 @@ import PostEditor from '@/features/post-editor/PostEditor'
 import FeedOfPosts from '@/widgets/posts/FeedOfPosts'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import FollowingFeed from '@/widgets/posts/FollowingFeed'
+import TrendsSidebar from '@/widgets/TrendsSidebar'
 
 export default async function Home() {
 	return (
@@ -21,6 +22,7 @@ export default async function Home() {
 					</TabsContent>
 				</Tabs>
 			</div>
+			<TrendsSidebar />
 		</main>
 	)
 }

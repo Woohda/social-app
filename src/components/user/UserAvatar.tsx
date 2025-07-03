@@ -21,6 +21,7 @@ const UserAvatar = ({ avatarUrl, size, className }: UserAvatarProps) => {
 				'aspect-auto h-fit flex-none rounded-full bg-secondary object-cover',
 				className
 			)}
+			priority
 		/>
 	)
 }
