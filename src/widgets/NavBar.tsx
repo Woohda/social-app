@@ -1,6 +1,6 @@
 'use client'
 
-import SearchField from '@/components/SearchField'
+import SearchField from '@/components/input/SearchField'
 import Link from 'next/link'
 import Image from 'next/image'
 import UserButton from '@/components/user/UserButton'
