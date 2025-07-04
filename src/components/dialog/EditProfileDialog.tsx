@@ -25,7 +25,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import AvatarInput from './AvatarInput'
+import AvatarInput from '@/features/edit-profile/AvatarInput'
 import avatarPlaceholder from '@/assets/avatar-placeholder.png'
 
 interface EditProfileDialogProps {

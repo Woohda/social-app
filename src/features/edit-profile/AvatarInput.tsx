@@ -2,7 +2,7 @@ import { StaticImageData } from 'next/image'
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import { CameraIcon } from 'lucide-react'
-import CropImageDialog from './CropImageDialog'
+import CropImageDialog from '../../components/dialog/CropImageDialog'
 import Resizer from 'react-image-file-resizer'
 
 interface AvatarInputProps {
