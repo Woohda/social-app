@@ -9,8 +9,11 @@ import DeletePostButton from '@/components/post/DeletePostButton'
 import Linkify from '@/features/Linkify'
 import UserTooltip from '@/features/UserTooltip'
 import MediaPreviews from './MediaPreviews'
-import LikeButton from './LikeButton'
-import BookmarkButton from './BookmarkButton'
+import LikeButton from '../button/LikeButton'
+import BookmarkButton from '../button/BookmarkButton'
+import { useState } from 'react'
+import CommentButton from '../button/CommentButton'
+import Comments from '@/features/leave-comment/Comments'
 
 interface PostProps {
 	post: PostData
@@ -18,6 +21,8 @@ interface PostProps {
 
 const Post = ({ post }: PostProps) => {
 	const { user } = useSession()
+
+	const [showComments, setShowComments] = useState(false)
 
 	return (
 		<article className='group/post flex flex-col gap-3 rounded-2xl bg-card p-5 shadow-sm'>
@@ -66,23 +71,30 @@ const Post = ({ post }: PostProps) => {
 				<MediaPreviews attachments={post.attachments} />
 			)}
 			<hr className='text-muted-foreground/20' />
-			<div className='flex gap-3 self-end'>
-				<LikeButton
-					postId={post.id}
-					initialState={{
-						likes: post._count.likes,
-						isLikedByUser: post.likes.some(like => like.userId === user?.id)
-					}}
+			<div className='flex gap-3 justify-between items-center'>
+				<CommentButton
+					post={post}
+					onClick={() => setShowComments(!showComments)}
 				/>
-				<BookmarkButton
-					postId={post.id}
-					initialState={{
-						isBookmarkedByUser: post.bookmarks.some(
-							bookmark => bookmark.userId === user?.id
-						)
-					}}
-				/>
+				<div className='flex gap-3 items-center'>
+					<LikeButton
+						postId={post.id}
+						initialState={{
+							likes: post._count.likes,
+							isLikedByUser: post.likes.some(like => like.userId === user?.id)
+						}}
+					/>
+					<BookmarkButton
+						postId={post.id}
+						initialState={{
+							isBookmarkedByUser: post.bookmarks.some(
+								bookmark => bookmark.userId === user?.id
+							)
+						}}
+					/>
+				</div>
 			</div>
+			{showComments && <Comments post={post} />}
 		</article>
 	)
 }
