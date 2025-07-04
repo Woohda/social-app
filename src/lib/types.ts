@@ -11,9 +11,14 @@ import { Prisma } from '@prisma/client'
  * и подписчиках соответствует Prisma.UserSelect
  * @type {PostData} - Тип данных поста с включением информации о пользователе,
  * который создал пост, соответствует Prisma.PostInclude
- * @interface {PostsPage} - Интерфейс для страницы постов, содержащий массив постов и курсор для пагинации
- * @interface {FollowerInfo} - Интерфейс для информации о подписчиках, содержащий количество подписчиков
+ * @interface PostsPage - Интерфейс для страницы постов, содержащий массив постов и курсор для пагинации
+ * @interface FollowerInfo - Интерфейс для информации о подписчиках, содержащий количество подписчиков
  * и информацию о том, подписан ли текущий пользователь на данного пользователя
+ * @interface LikeInfo - Интерфейс для информации о лайках, содержащий количество лайков
+ * и информацию о том, лайкнут ли пост текущим пользователем
+ * @interface BookmarkInfo - Интерфейс для информации о закладках, содержащий информацию о том,
+ * добавлен ли пост в закладки
+ *
  */
 
 export function getUserDataSelect(loggedInUserId: string) {
@@ -59,6 +64,14 @@ export function getPostDataInclude(loggedInUserId: string) {
 				userId: true
 			}
 		},
+		bookmarks: {
+			where: {
+				userId: loggedInUserId
+			},
+			select: {
+				userId: true
+			}
+		},
 		_count: {
 			select: {
 				likes: true
@@ -84,4 +97,8 @@ export interface FollowerInfo {
 export interface LikeInfo {
 	likes: number
 	isLikedByUser: boolean
+}
+
+export interface BookmarkInfo {
+	isBookmarkedByUser: boolean
 }

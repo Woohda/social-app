@@ -8,7 +8,7 @@ import kyInstance from '@/lib/ky'
 import InfiniteScrollContainer from '@/components/InfiniteScrollContainer'
 import PostLoadingSkeleton from '@/components/post/PostLoadingSkeleton'
 
-const FeedOfPosts = () => {
+const BookmarksFeed = () => {
 	const {
 		data,
 		fetchNextPage,
@@ -19,11 +19,11 @@ const FeedOfPosts = () => {
 		isSuccess,
 		isError
 	} = useInfiniteQuery({
-		queryKey: ['post-feed', 'for-you'],
+		queryKey: ['post-feed', 'bookmarks'],
 		queryFn: ({ pageParam }) =>
 			kyInstance
 				.get(
-					'/api/posts/for-you',
+					'/api/posts/bookmarked',
 					pageParam ? { searchParams: { cursor: pageParam } } : {}
 				)
 				.json<PostsPage>(),
@@ -38,7 +38,7 @@ const FeedOfPosts = () => {
 	if (isSuccess && !posts.length && !hasNextPage)
 		return (
 			<p className='p-3 shadow-sm rounded-2xl text-center text-muted-foreground bg-card'>
-				Вы еще не создали ни одного поста.
+				Вы ещё не добавили ни одного поста в закладки.
 			</p>
 		)
 
@@ -62,4 +62,4 @@ const FeedOfPosts = () => {
 	)
 }
 
-export default FeedOfPosts
+export default BookmarksFeed

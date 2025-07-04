@@ -10,6 +10,7 @@ import Linkify from '@/features/Linkify'
 import UserTooltip from '@/features/UserTooltip'
 import MediaPreviews from './MediaPreviews'
 import LikeButton from './LikeButton'
+import BookmarkButton from './BookmarkButton'
 
 interface PostProps {
 	post: PostData
@@ -64,14 +65,24 @@ const Post = ({ post }: PostProps) => {
 			{post.attachments.length > 0 && (
 				<MediaPreviews attachments={post.attachments} />
 			)}
-			<LikeButton
-				postId={post.id}
-				initialState={{
-					likes: post._count.likes,
-					isLikedByUser: post.likes.some(like => like.userId === user?.id)
-				}}
-				className='self-end'
-			/>
+			<hr className='text-muted-foreground/20' />
+			<div className='flex gap-3 self-end'>
+				<LikeButton
+					postId={post.id}
+					initialState={{
+						likes: post._count.likes,
+						isLikedByUser: post.likes.some(like => like.userId === user?.id)
+					}}
+				/>
+				<BookmarkButton
+					postId={post.id}
+					initialState={{
+						isBookmarkedByUser: post.bookmarks.some(
+							bookmark => bookmark.userId === user?.id
+						)
+					}}
+				/>
+			</div>
 		</article>
 	)
 }
