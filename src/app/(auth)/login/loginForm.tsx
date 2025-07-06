@@ -15,7 +15,7 @@ import { Input } from '@/components/ui/input'
 import { useState, useTransition } from 'react'
 import { login } from './actions'
 import LoadingButton from '@/components/button/LoadingButton'
-import PasswordInput from '@/components/PasswordInput'
+import PasswordInput from '@/components/input/PasswordInput'
 
 export default function LoginForm() {
 	const [isPending, startTransition] = useTransition()

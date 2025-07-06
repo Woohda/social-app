@@ -3,7 +3,7 @@
 import { UserData } from '@/lib/types'
 import { useState } from 'react'
 import { Button } from '../ui/button'
-import EditProfileDialog from '@/features/edit-profile/EditProfileDialog'
+import EditProfileDialog from '@/components/dialog/EditProfileDialog'
 
 interface EditProfileButtonProps {
 	user: UserData

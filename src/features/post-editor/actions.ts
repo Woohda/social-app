@@ -30,11 +30,11 @@ export async function createPost(post: {
 		throw new Error('Вы не авторизованы')
 	}
 
-	const { content, mediaIds } = createPostSchema.parse(post)
+	const { content: contentValidated, mediaIds } = createPostSchema.parse(post)
 
 	const newPost = await prisma.post.create({
 		data: {
-			content,
+			content: contentValidated,
 			userId: user.id,
 			attachments: {
 				connect: mediaIds?.map(id => ({ id }))

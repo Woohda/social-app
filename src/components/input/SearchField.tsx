@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { Input } from './ui/input'
+import { Input } from '../ui/input'
 import { SearchIcon } from 'lucide-react'
 
 const SearchField = () => {
