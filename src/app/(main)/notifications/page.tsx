@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import NotificationsFeed from '@/widgets/posts/NotificationsFeed'
+import NotificationsFeed from '@/widgets/feeds/NotificationsFeed'
 import TrendsSidebar from '@/widgets/TrendsSidebar'
 
 export const metadata: Metadata = {
