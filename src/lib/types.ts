@@ -102,6 +102,30 @@ export type CommentData = Prisma.CommentGetPayload<{
 	include: ReturnType<typeof getCommentDataInclude>
 }>
 
+export const notificationInclude = {
+	issuer: {
+		select: {
+			username: true,
+			name: true,
+			avatarUrl: true
+		}
+	},
+	post: {
+		select: {
+			content: true
+		}
+	}
+} satisfies Prisma.NotificationInclude
+
+export type NotificationData = Prisma.NotificationGetPayload<{
+	include: typeof notificationInclude
+}>
+
+export interface NotificationsPage {
+	notifications: NotificationData[]
+	nextCursor: string | null
+}
+
 export interface CommentsPage {
 	comments: CommentData[]
 	prevCursor: string | null
