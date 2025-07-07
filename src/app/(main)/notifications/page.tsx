@@ -1,16 +1,16 @@
 import { Metadata } from 'next'
-import BookmarksFeed from '@/widgets/feeds/BookmarksFeed'
+import NotificationsFeed from '@/widgets/feeds/NotificationsFeed'
 import TrendsSidebar from '@/widgets/TrendsSidebar'
 
 export const metadata: Metadata = {
-	title: 'Закладки'
+	title: 'Уведомления'
 }
 
 export default async function Page() {
 	return (
 		<main className='w-full min-w-0 flex gap-5'>
 			<div className='w-full flex flex-col gap-5'>
-				<BookmarksFeed />
+				<NotificationsFeed />
 			</div>
 			<TrendsSidebar />
 		</main>

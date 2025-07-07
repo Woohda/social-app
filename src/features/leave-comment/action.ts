@@ -34,14 +34,28 @@ export async function createComment(comment: {
 		content: comment.content
 	})
 
-	const newComment = await prisma.comment.create({
-		data: {
-			content: contentValidated,
-			userId: user.id,
-			postId: comment.post.id
-		},
-		include: getCommentDataInclude(user.id)
-	})
+	const [newComment] = await prisma.$transaction([
+		prisma.comment.create({
+			data: {
+				content: contentValidated,
+				userId: user.id,
+				postId: comment.post.id
+			},
+			include: getCommentDataInclude(user.id)
+		}),
+		...(comment.post.user.id !== user.id
+			? [
+					prisma.notification.create({
+						data: {
+							issuerId: user.id,
+							recipientId: comment.post.user.id,
+							postId: comment.post.id,
+							type: 'COMMENT'
+						}
+					})
+				]
+			: [])
+	])
 
 	return newComment
 }
