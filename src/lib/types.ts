@@ -144,3 +144,7 @@ export interface LikeInfo {
 export interface BookmarkInfo {
 	isBookmarkedByUser: boolean
 }
+
+export interface NotificationCountType {
+	unreadCount: number
+}
