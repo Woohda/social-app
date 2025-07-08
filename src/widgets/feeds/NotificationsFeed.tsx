@@ -7,6 +7,8 @@ import kyInstance from '@/lib/ky'
 import InfiniteScrollContainer from '@/components/InfiniteScrollContainer'
 import Notification from '@/components/notification/Notification'
 import NotificationLoadingSkeleton from '@/components/notification/NotificationLoadingSkeleton'
+import { useNotificationInfo } from '@/hooks/use-notificationInfo'
+import { useEffect } from 'react'
 
 const NotificationsFeed = () => {
 	const {
@@ -30,6 +32,12 @@ const NotificationsFeed = () => {
 		initialPageParam: null as string | null,
 		getNextPageParam: lastPage => lastPage.nextCursor
 	})
+
+	const mutation = useNotificationInfo()
+
+	useEffect(() => {
+		mutation()
+	}, [mutation])
 
 	const notifications = data?.pages.flatMap(page => page.notifications) || []
 
