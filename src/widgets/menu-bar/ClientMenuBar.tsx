@@ -34,11 +34,13 @@ const ClientMenuBar = ({
 				</div>
 			</MenuButton>
 			<MenuButton title='Сообщения' href='/messages' pathname={pathname}>
-				<MailIcon />
-				<MessageCount
-					initialState={{ unreadCount: unreadMessageCount }}
-					className='absolute -top-1.5 -right-1'
-				/>
+				<div className='relative'>
+					<MailIcon />
+					<MessageCount
+						initialState={{ unreadCount: unreadMessageCount }}
+						className='absolute -top-1.5 -right-1'
+					/>
+				</div>
 			</MenuButton>
 			<MenuButton title='Закладки' href='/bookmarks' pathname={pathname}>
 				<BookmarkIcon />
