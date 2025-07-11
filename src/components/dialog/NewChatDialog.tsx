@@ -51,7 +51,7 @@ const NewChatDialog = ({ onOpenChange, onChatCreated }: NewChatDialogProps) => {
 									key={user.id}
 									user={user}
 									onRemove={() =>
-										setSelectedUsers(prev => prev.filter(u => u.id === user.id))
+										setSelectedUsers(prev => prev.filter(u => u.id !== user.id))
 									}
 								/>
 							))}
