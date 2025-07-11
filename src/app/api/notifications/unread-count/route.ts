@@ -1,6 +1,6 @@
 import { validateRequest } from '@/auth'
 import prisma from '@/lib/prisma'
-import { NotificationCountType } from '@/lib/types'
+import { NotificationsCountInfo } from '@/lib/types'
 
 /**
  * Обработчик GET-запроса для получения количества непрочитанных уведомлений.
@@ -27,7 +27,7 @@ export async function GET() {
 			}
 		})
 
-		const data: NotificationCountType = {
+		const data: NotificationsCountInfo = {
 			unreadCount
 		}
 
