@@ -2,15 +2,21 @@
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { BellIcon, BookmarkIcon, HomeIcon, MailIcon } from 'lucide-react'
-import NotificationCount from '@/components/NotificationCount'
+import NotificationCount from '@/components/counts/NotificationCount'
 import MenuButton from '@/components/button/MenuButton'
+import MessageCount from '@/components/counts/MessageCount'
 
 interface ClientMenuBarProps {
 	className: string
-	unreadCount: number
+	unreadNotificationCount: number
+	unreadMessageCount: number
 }
 
-const ClientMenuBar = ({ className, unreadCount }: ClientMenuBarProps) => {
+const ClientMenuBar = ({
+	className,
+	unreadNotificationCount,
+	unreadMessageCount
+}: ClientMenuBarProps) => {
 	const pathname = usePathname()
 	return (
 		<div className={cn(className)}>
@@ -22,13 +28,17 @@ const ClientMenuBar = ({ className, unreadCount }: ClientMenuBarProps) => {
 				<div className='relative'>
 					<BellIcon />
 					<NotificationCount
-						initialState={{ unreadCount: unreadCount }}
+						initialState={{ unreadCount: unreadNotificationCount }}
 						className='absolute -top-1.5 -right-1'
 					/>
 				</div>
 			</MenuButton>
 			<MenuButton title='Сообщения' href='/messages' pathname={pathname}>
 				<MailIcon />
+				<MessageCount
+					initialState={{ unreadCount: unreadMessageCount }}
+					className='absolute -top-1.5 -right-1'
+				/>
 			</MenuButton>
 			<MenuButton title='Закладки' href='/bookmarks' pathname={pathname}>
 				<BookmarkIcon />

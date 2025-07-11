@@ -1,5 +1,6 @@
 import { validateRequest } from '@/auth'
 import prisma from '@/lib/prisma'
+import { streamServerClient } from '@/lib/stream'
 import { createUploadthing, FileRouter } from 'uploadthing/next'
 import { UploadThingError, UTApi } from 'uploadthing/server'
 
@@ -23,13 +24,21 @@ export const fileRouter = {
 				await new UTApi().deleteFiles(key as string)
 			}
 			const newAvatarUrl = file.ufsUrl
-			await prisma.user.update({
-				where: { id: metadata.user.id },
-				data: { avatarUrl: newAvatarUrl }
-			})
-			return {
-				avatarUrl: newAvatarUrl
-			}
+
+			await Promise.all([
+				await prisma.user.update({
+					where: { id: metadata.user.id },
+					data: { avatarUrl: newAvatarUrl }
+				}),
+				streamServerClient.partialUpdateUser({
+					id: metadata.user.id,
+					set: {
+						image: newAvatarUrl
+					}
+				})
+			])
+
+			return { avatarUrl: newAvatarUrl }
 		}),
 	attachment: f({
 		image: { maxFileSize: '4MB', maxFileCount: 5 },

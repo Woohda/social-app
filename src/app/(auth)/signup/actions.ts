@@ -12,6 +12,7 @@ import { hash } from '@node-rs/argon2'
 import { generateIdFromEntropySize } from 'lucia'
 import { redirect } from 'next/navigation'
 import { isRedirectError } from 'next/dist/client/components/redirect'
+import { streamServerClient } from '@/lib/stream'
 
 export async function signUp(
 	credentials: SignUpValues
@@ -42,15 +43,22 @@ export async function signUp(
 		// генерируем id пользователя
 		const userId = generateIdFromEntropySize(10)
 
-		// создаем пользователя
-		await prisma.user.create({
-			data: {
+		// создаем пользователя и
+		await prisma.$transaction(async tx => {
+			await tx.user.create({
+				data: {
+					id: userId,
+					email,
+					username,
+					passwordHash,
+					name
+				}
+			})
+			await streamServerClient.upsertUser({
 				id: userId,
-				email,
 				username,
-				passwordHash,
 				name
-			}
+			})
 		})
 
 		// создаем сессию
