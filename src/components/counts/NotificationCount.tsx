@@ -1,12 +1,12 @@
 'use client'
 
 import kyInstance from '@/lib/ky'
-import { NotificationCountType } from '@/lib/types'
+import { NotificationsCountInfo } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 
 interface NotificationCountProps {
-	initialState: NotificationCountType
+	initialState: NotificationsCountInfo
 	className?: string
 }
 
@@ -19,7 +19,7 @@ const NotificationCount = ({
 		queryFn: () =>
 			kyInstance
 				.get('/api/notifications/unread-count')
-				.json<NotificationCountType>(),
+				.json<NotificationsCountInfo>(),
 		initialData: initialState,
 		refetchInterval: 60 * 1000 // 1 minute
 	})
