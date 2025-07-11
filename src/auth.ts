@@ -26,6 +26,7 @@ const adapter = new PrismaAdapter(prisma.session, prisma.user)
 interface DatabaseUserAttributes {
 	id: string
 	username: string
+	name: string
 	avatarUrl: string | null
 	googleId: string | null
 	githubId: string | null
@@ -43,6 +44,7 @@ export const lucia = new Lucia(adapter, {
 		return {
 			id: databaseUserAttributes.id,
 			username: databaseUserAttributes.username,
+			name: databaseUserAttributes.name,
 			avatarUrl: databaseUserAttributes.avatarUrl,
 			googleId: databaseUserAttributes.googleId,
 			githubId: databaseUserAttributes.githubId
