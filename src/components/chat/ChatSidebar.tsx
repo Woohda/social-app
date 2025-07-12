@@ -3,12 +3,14 @@ import {
 	ChannelList,
 	ChannelPreviewMessenger,
 	ChannelPreviewUIComponentProps,
-	DefaultStreamChatGenerics
+	DefaultStreamChatGenerics,
+	useChatContext
 } from 'stream-chat-react'
 import { cn } from '@/lib/utils'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { Channel } from 'stream-chat'
 import HeaderSidebar from './HeaderChatSidebar'
+import { useQueryClient } from '@tanstack/react-query'
 
 interface ChatSidebarProps {
 	open: boolean
@@ -20,6 +22,18 @@ const ChatSidebar = ({ open, onClose }: ChatSidebarProps) => {
 	if (!user) {
 		throw new Error('User is not logged in')
 	}
+
+	const queryClient = useQueryClient()
+
+	const { channel } = useChatContext()
+
+	useEffect(() => {
+		if (channel?.id) {
+			queryClient.invalidateQueries({
+				queryKey: ['unread-messages-count']
+			})
+		}
+	}, [channel?.id, queryClient])
 
 	const ChannelPreviewCustom = useCallback(
 		(props: ChannelPreviewUIComponentProps<DefaultStreamChatGenerics>) => (
