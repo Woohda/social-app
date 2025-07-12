@@ -49,8 +49,26 @@ export function useCreateNewMessage({
 
 	const mutation = useMutation({
 		mutationFn: async () => {
-			const channel = client.channel('messaging', {
-				members: [loggedInUser.id, ...selectedUsers.map(u => u.id)],
+			const sortedIds = [
+				loggedInUser.id,
+				...selectedUsers.map(u => u.id)
+			].sort()
+			const channelId = `chat-${sortedIds.join('-')}`
+
+			// Сначала пытаемся найти существующий канал
+			const existingChannels = await client.queryChannels({
+				type: 'messaging',
+				members: { $eq: sortedIds },
+				id: { $eq: channelId }
+			})
+
+			if (existingChannels.length > 0) {
+				return existingChannels[0]
+			}
+
+			// Если не найден — создаем новый
+			const channel = client.channel('messaging', channelId, {
+				members: sortedIds,
 				name:
 					selectedUsers.length > 1
 						? loggedInUser.name +
@@ -58,7 +76,8 @@ export function useCreateNewMessage({
 							selectedUsers.map(u => u.name).join(', ')
 						: undefined
 			})
-			await channel.create()
+
+			await channel.watch()
 			return channel
 		},
 		onSuccess: channel => {
