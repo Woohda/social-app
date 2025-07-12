@@ -3,7 +3,7 @@
 import { useInitializeChatClient } from '@/hooks/use-initializeChatClient'
 import { Loader2 } from 'lucide-react'
 import { Chat as StreamChat } from 'stream-chat-react'
-import ChatSidebar from './ChatSidebar1'
+import ChatSidebar from './ChatSideBar'
 import ChatChannel from './ChatChannel'
 import { useTheme } from 'next-themes'
 import { useState } from 'react'
