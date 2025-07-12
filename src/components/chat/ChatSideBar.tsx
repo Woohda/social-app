@@ -1,28 +1,28 @@
 import useSession from '@/hooks/use-session'
-import { MailPlusIcon, X } from 'lucide-react'
 import {
 	ChannelList,
 	ChannelPreviewMessenger,
-	ChannelPreviewUIComponentProps
+	ChannelPreviewUIComponentProps,
+	DefaultStreamChatGenerics
 } from 'stream-chat-react'
-import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
-import { useCallback, useState } from 'react'
-import NewChatDialog from '../dialog/NewChatDialog'
+import { useCallback } from 'react'
+import { Channel } from 'stream-chat'
+import HeaderSidebar from './HeaderChatSidebar'
 
-interface ChatSideBarProps {
+interface ChatSidebarProps {
 	open: boolean
 	onClose: () => void
 }
 
-const ChatSidebar = ({ open, onClose }: ChatSideBarProps) => {
+const ChatSidebar = ({ open, onClose }: ChatSidebarProps) => {
 	const { user } = useSession()
 	if (!user) {
 		throw new Error('User is not logged in')
 	}
 
 	const ChannelPreviewCustom = useCallback(
-		(props: ChannelPreviewUIComponentProps) => (
+		(props: ChannelPreviewUIComponentProps<DefaultStreamChatGenerics>) => (
 			<ChannelPreviewMessenger
 				{...props}
 				onSelect={() => {
@@ -34,6 +34,15 @@ const ChatSidebar = ({ open, onClose }: ChatSideBarProps) => {
 		[onClose]
 	)
 
+	const filterDuplicateChannels = useCallback((channels: Channel[]) => {
+		const seen = new Set()
+		return channels.filter(channel => {
+			if (seen.has(channel.id)) return false
+			seen.add(channel.id)
+			return true
+		})
+	}, [])
+
 	return (
 		<div
 			className={cn(
@@ -41,8 +50,8 @@ const ChatSidebar = ({ open, onClose }: ChatSideBarProps) => {
 				open ? 'flex' : 'hidden'
 			)}
 		>
-			<MenuHeader onClose={onClose} />
-			<ChannelList
+			<HeaderSidebar onClose={onClose} />
+			<ChannelList<DefaultStreamChatGenerics>
 				filters={{
 					type: 'messaging',
 					members: { $in: [user.id] }
@@ -58,46 +67,10 @@ const ChatSidebar = ({ open, onClose }: ChatSideBarProps) => {
 						}
 					}
 				}}
+				channelRenderFilterFn={filterDuplicateChannels}
 				Preview={ChannelPreviewCustom}
 			/>
 		</div>
-	)
-}
-
-interface MenuHeaderProps {
-	onClose: () => void
-}
-
-function MenuHeader({ onClose }: MenuHeaderProps) {
-	const [showNewChatDialog, setShowNewChatDialog] = useState(false)
-	return (
-		<>
-			<div className='flex items-center gap-3 p-2'>
-				<div className='h-full md:hidden'>
-					<Button size='icon' variant='ghost' onClick={onClose}>
-						<X className='size-5' />
-					</Button>
-				</div>
-				<h1 className='me-auto text-xl font-bold md:ms-2'>Сообщения</h1>
-				<Button
-					size='icon'
-					variant='ghost'
-					title='Написать сообщение'
-					onClick={() => setShowNewChatDialog(true)}
-				>
-					<MailPlusIcon className='size-5' />
-				</Button>
-			</div>
-			{showNewChatDialog && (
-				<NewChatDialog
-					onOpenChange={setShowNewChatDialog}
-					onChatCreated={() => {
-						setShowNewChatDialog(false)
-						onClose()
-					}}
-				/>
-			)}
-		</>
 	)
 }
 
