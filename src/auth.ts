@@ -3,6 +3,7 @@ import prisma from './lib/prisma'
 import { Lucia, User, Session } from 'lucia'
 import { cache } from 'react'
 import { cookies } from 'next/headers'
+import { Google, GitHub } from 'arctic'
 
 /**
  * Этот файл содержит функции и настройки для работы с аутентификацией пользователей
@@ -31,6 +32,18 @@ interface DatabaseUserAttributes {
 	googleId: string | null
 	githubId: string | null
 }
+
+export const google = new Google(
+	process.env.GOOGLE_CLIENT_ID!,
+	process.env.GOOGLE_CLIENT_SECRET!,
+	`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback/google`
+)
+
+export const github = new GitHub(
+	process.env.GITHUB_CLIENT_ID!,
+	process.env.GITHUB_CLIENT_SECRET!,
+	`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback/github`
+)
 
 // создаем экземпляр Lucia и передаем ему адаптер
 export const lucia = new Lucia(adapter, {
