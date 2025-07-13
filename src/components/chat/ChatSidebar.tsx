@@ -11,6 +11,7 @@ import { useCallback, useEffect } from 'react'
 import { Channel } from 'stream-chat'
 import HeaderSidebar from './HeaderChatSidebar'
 import { useQueryClient } from '@tanstack/react-query'
+import { Loader2 } from 'lucide-react'
 
 interface ChatSidebarProps {
 	open: boolean
@@ -25,7 +26,7 @@ const ChatSidebar = ({ open, onClose }: ChatSidebarProps) => {
 
 	const queryClient = useQueryClient()
 
-	const { channel } = useChatContext()
+	const { client, channel } = useChatContext()
 
 	useEffect(() => {
 		if (!channel?.id || !channel.getClient().userID) return
@@ -56,6 +57,10 @@ const ChatSidebar = ({ open, onClose }: ChatSidebarProps) => {
 			return true
 		})
 	}, [])
+
+	if (!client.userID) {
+		return <Loader2 className='mx-auto my-3 animate-spin' />
+	}
 
 	return (
 		<div
