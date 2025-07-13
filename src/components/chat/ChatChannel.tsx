@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/lib/utils'
 import { Channel, MessageInput, MessageList, Window } from 'stream-chat-react'
 import CustomChannelHeader from './CustomChannelHeader'

@@ -1,3 +1,5 @@
+'use client'
+
 import { CheckIcon } from 'lucide-react'
 import { UserResponse } from 'stream-chat'
 import { DefaultStreamChatGenerics } from 'stream-chat-react'

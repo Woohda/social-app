@@ -20,7 +20,6 @@ export async function GET() {
 				{ status: 401 }
 			)
 		}
-		console.log('Получение токена для пользователя:', user.id)
 
 		const expirationTime = Math.floor(Date.now() / 1000) + 60 * 60 // Текущее время в секундах плюс 60 минут
 		const issuedAt = Math.floor(Date.now() / 1000) - 60 // Текущее время в секундах минус 60 секунд

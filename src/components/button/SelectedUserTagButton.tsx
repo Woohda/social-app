@@ -1,3 +1,5 @@
+'use client'
+
 import { UserResponse } from 'stream-chat'
 import { DefaultStreamChatGenerics } from 'stream-chat-react'
 import UserAvatar from '../user/UserAvatar'

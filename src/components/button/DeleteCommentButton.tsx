@@ -1,3 +1,5 @@
+'use client'
+
 import { CommentData } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { XIcon } from 'lucide-react'

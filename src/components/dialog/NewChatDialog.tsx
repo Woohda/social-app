@@ -1,3 +1,5 @@
+'use client'
+
 import { DefaultStreamChatGenerics } from 'stream-chat-react'
 import {
 	Dialog,

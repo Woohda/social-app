@@ -1,3 +1,5 @@
+'use client'
+
 import DeleteButton from '@/components/button/DeleteButton'
 import DeletePostDialog from '@/components/dialog/DeletePostDialog'
 import { PostData } from '@/lib/types'
