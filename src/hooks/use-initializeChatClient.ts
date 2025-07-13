@@ -1,20 +1,31 @@
 import { StreamChat } from 'stream-chat'
 import useSession from './use-session'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import kyInstance from '@/lib/ky'
 
 export function useInitializeChatClient() {
 	const { user } = useSession()
 	const [chatClient, setChatClient] = useState<StreamChat | null>(null)
+	const clientRef = useRef<StreamChat | null>(null)
 
 	useEffect(() => {
 		if (!user) return
-		const client = StreamChat.getInstance(
-			process.env.NEXT_PUBLIC_STREAM_API_KEY!
-		)
 		let isMounted = true
+
+		if (!clientRef.current) {
+			clientRef.current = StreamChat.getInstance(
+				process.env.NEXT_PUBLIC_STREAM_API_KEY!
+			)
+		}
+
+		const client = clientRef.current
+
 		const connect = async () => {
 			try {
+				if (client.userID) {
+					if (isMounted) setChatClient(client)
+					return
+				}
 				await client.connectUser(
 					{
 						id: user.id,
