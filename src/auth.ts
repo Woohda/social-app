@@ -36,13 +36,17 @@ interface DatabaseUserAttributes {
 export const google = new Google(
 	process.env.GOOGLE_CLIENT_ID!,
 	process.env.GOOGLE_CLIENT_SECRET!,
-	`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback/google`
+	process.env.NODE_ENV === 'production'
+		? 'https://social-app-tawny-theta.vercel.app/api/auth/callback/google'
+		: 'http://localhost:3000/api/auth/callback/google'
 )
 
 export const github = new GitHub(
 	process.env.GITHUB_CLIENT_ID!,
 	process.env.GITHUB_CLIENT_SECRET!,
-	`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback/github`
+	process.env.NODE_ENV === 'production'
+		? 'https://social-app-tawny-theta.vercel.app/api/auth/callback/github'
+		: 'http://localhost:3000/api/auth/callback/github'
 )
 
 // создаем экземпляр Lucia и передаем ему адаптер
