@@ -1,3 +1,5 @@
+'use client'
+
 import { PostData } from '@/lib/types'
 import { MessageSquareIcon } from 'lucide-react'
 

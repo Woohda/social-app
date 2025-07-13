@@ -1,3 +1,5 @@
+'use client'
+
 import { ChannelHeader, ChannelHeaderProps } from 'stream-chat-react'
 import { Button } from '../ui/button'
 import { MenuIcon } from 'lucide-react'
