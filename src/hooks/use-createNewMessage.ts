@@ -27,6 +27,7 @@ export function useCreateNewMessage({
 	const searchInputDebounced = useDebounce(searchInput)
 
 	const { data, isFetching, isError, isSuccess } = useQuery({
+		enabled: !!client.userID && !!searchInputDebounced,
 		queryKey: ['stream-users', searchInputDebounced],
 		queryFn: async () =>
 			client.queryUsers(
@@ -49,6 +50,9 @@ export function useCreateNewMessage({
 
 	const mutation = useMutation({
 		mutationFn: async () => {
+			if (!client.userID) {
+				throw new Error('Chat client is not connected')
+			}
 			const sortedIds = [
 				loggedInUser.id,
 				...selectedUsers.map(u => u.id)
