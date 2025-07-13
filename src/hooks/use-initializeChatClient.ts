@@ -26,6 +26,10 @@ export function useInitializeChatClient() {
 					if (isMounted) setChatClient(client)
 					return
 				}
+				if (client.userID === user.id) {
+					setChatClient(client)
+					return
+				}
 				await client.connectUser(
 					{
 						id: user.id,
