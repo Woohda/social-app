@@ -28,12 +28,12 @@ const ChatSidebar = ({ open, onClose }: ChatSidebarProps) => {
 	const { channel } = useChatContext()
 
 	useEffect(() => {
-		if (channel?.id) {
-			queryClient.invalidateQueries({
-				queryKey: ['unread-messages-count']
-			})
-		}
-	}, [channel?.id, queryClient])
+		if (!channel?.id || !channel.getClient().userID) return
+
+		queryClient.invalidateQueries({
+			queryKey: ['unread-messages-count']
+		})
+	}, [channel, queryClient])
 
 	const ChannelPreviewCustom = useCallback(
 		(props: ChannelPreviewUIComponentProps<DefaultStreamChatGenerics>) => (
