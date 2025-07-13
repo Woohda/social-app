@@ -11,29 +11,37 @@ export function useInitializeChatClient() {
 	const [chatClient, setChatClient] = useState<StreamChat | null>(null)
 
 	useEffect(() => {
+		let isMounted = true
 		const client = StreamChat.getInstance(
 			process.env.NEXT_PUBLIC_STREAM_API_KEY!
 		)
-		client
-			.connectUser(
-				{
-					id: user.id,
-					username: user.username,
-					name: user.name,
-					image: user.avatarUrl
-				},
-				async () => {
-					const data = await kyInstance
+		const connectUser = async () => {
+			try {
+				if (!client.userID) {
+					const { token } = await kyInstance
 						.get('/api/get-token')
 						.json<{ token: string }>()
-					return data.token
+
+					await client.connectUser(
+						{
+							id: user.id,
+							username: user.username,
+							name: user.name,
+							image: user.avatarUrl
+						},
+						token
+					)
 				}
-			)
-			.catch(error => {
+
+				if (isMounted) setChatClient(client)
+			} catch (error) {
 				console.error('Ошибка при подключении пользователя:', error)
-			})
-			.then(() => setChatClient(client))
+			}
+		}
+		connectUser()
+
 		return () => {
+			isMounted = false
 			setChatClient(null)
 			client
 				.disconnectUser()
