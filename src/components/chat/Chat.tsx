@@ -3,7 +3,7 @@
 import { useInitializeChatClient } from '@/hooks/use-initializeChatClient'
 import { Loader2 } from 'lucide-react'
 import { Chat as StreamChat } from 'stream-chat-react'
-import ChatSidebar from './ChatSidebar'
+// import ChatSidebar from './ChatSidebar'
 import ChatChannel from './ChatChannel'
 import { useTheme } from 'next-themes'
 import { useState } from 'react'
@@ -29,7 +29,7 @@ const Chat = () => {
 							: 'str-chat__theme-light'
 					}
 				>
-					<ChatSidebar open={isOpen} onClose={() => setIsOpen(false)} />
+					{/* <ChatSidebar open={isOpen} onClose={() => setIsOpen(false)} /> */}
 					<ChatChannel open={!isOpen} openSidebar={() => setIsOpen(true)} />
 				</StreamChat>
 			</div>
