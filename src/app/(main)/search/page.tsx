@@ -9,9 +9,7 @@ interface PageProps {
 // Функция для генерации метаданных страницы поиска по запросу
 // Используется для SEO-оптимизации и улучшения отображения в социальных сетях
 // Возвращает заголовок, описание и Open Graph метаданные для страницы поста.
-export async function generateMetadata({
-	searchParams: { q }
-}: PageProps): Promise<Metadata> {
+export function generateMetadata({ searchParams: { q } }: PageProps): Metadata {
 	return {
 		title: `Результаты поиска по запросу: "${q}"`
 	}
