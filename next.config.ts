@@ -15,6 +15,14 @@ const nextConfig: NextConfig = {
 				pathname: '/f/*'
 			}
 		]
+	},
+	rewrites: async () => {
+		return [
+			{
+				source: '/hashtag/:tag',
+				destination: '/search?q=%23:tag'
+			}
+		]
 	}
 }
 
