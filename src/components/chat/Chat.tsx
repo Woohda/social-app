@@ -4,15 +4,15 @@ import { useInitializeChatClient } from '@/hooks/use-initializeChatClient'
 import { Loader2 } from 'lucide-react'
 import { Chat as StreamChat } from 'stream-chat-react'
 // import ChatSidebar from './ChatSidebar'
-import ChatChannel from './ChatChannel'
+// import ChatChannel from './ChatChannel'
 import { useTheme } from 'next-themes'
-import { useState } from 'react'
+// import { useState } from 'react'
 
 const Chat = () => {
 	const chatClient = useInitializeChatClient()
 	const { resolvedTheme } = useTheme()
 
-	const [isOpen, setIsOpen] = useState(false)
+	// const [isOpen, setIsOpen] = useState(false)
 
 	if (!chatClient) {
 		return <Loader2 className='mx-auto my-3 animate-spin' />
@@ -30,7 +30,7 @@ const Chat = () => {
 					}
 				>
 					{/* <ChatSidebar open={isOpen} onClose={() => setIsOpen(false)} /> */}
-					<ChatChannel open={!isOpen} openSidebar={() => setIsOpen(true)} />
+					{/* <ChatChannel open={!isOpen} openSidebar={() => setIsOpen(true)} /> */}
 				</StreamChat>
 			</div>
 		</main>
