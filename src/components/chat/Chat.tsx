@@ -1,7 +1,7 @@
 'use client'
 
-import { useInitializeChatClient } from '@/hooks/use-initializeChatClient'
-import { Loader2 } from 'lucide-react'
+// import { useInitializeChatClient } from '@/hooks/use-initializeChatClient'
+// import { Loader2 } from 'lucide-react'
 // import { Chat as StreamChat } from 'stream-chat-react'
 // import ChatSidebar from './ChatSidebar'
 // import ChatChannel from './ChatChannel'
@@ -9,14 +9,14 @@ import { Loader2 } from 'lucide-react'
 // import { useState } from 'react'
 
 const Chat = () => {
-	const chatClient = useInitializeChatClient()
+	// const chatClient = useInitializeChatClient()
 	// const { resolvedTheme } = useTheme()
 
 	// const [isOpen, setIsOpen] = useState(false)
 
-	if (!chatClient) {
-		return <Loader2 className='mx-auto my-3 animate-spin' />
-	}
+	// if (!chatClient) {
+	// 	return <Loader2 className='mx-auto my-3 animate-spin' />
+	// }
 
 	return (
 		<main className='relative w-full overflow-hidden rounded-2xl bg-card shadow-sm'>
