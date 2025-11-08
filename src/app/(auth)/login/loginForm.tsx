@@ -68,7 +68,7 @@ export default function LoginForm() {
 						<FormItem>
 							<FormLabel>Пароль:</FormLabel>
 							<FormControl>
-								<PasswordInput {...field} placeholder='Придумаете пароль' />
+								<PasswordInput {...field} placeholder='Ввведите пароль' />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
